@@ -18,12 +18,13 @@
 - `KOLOP_CRYPT` Put your Kolop Crypt
 - `DRIVEFIRE_CRYPT` Put your DriveFire Crypt
 - `DRIVEBUZZ_CRYPT` Put your DriveBuzz Crypt
+- `DRIVEHUB_CRYPT` Put your DriveHub Crypt
 - `GADRIVE_CRYPT` Put your GaDrive Crypt
 - `JIODRIVE_CRYPT` Put your JioDrive Crypt
 - `Sharerpw_XSRF` Put your Sharer XSRF Token
 - `Sharerpw_laravel` Put your Sharer Laravel Session
 - `UPTOBOX_TOKEN` Put your UptoBox Account Token (Free Account works too!)
-- `EMILY_API_URL` Your [Emily API](https://github.com/missemily2022/Emily-API) instance Url. Separate API URLs by space
+- `EMILY_API_URL` Your [Emily API](https://github.com/missemily2022/Emily-API) instance Urls. Separate API URLs by space
 - `UPSTREAM_REPO` Add the Upstream Repo of your Bot for automatic updation
 ---
 
