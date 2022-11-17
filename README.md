@@ -10,6 +10,7 @@
 - `SUDO_USERS` Sudo Users who can control the Bot. Separate User IDs by space
 - `BOT_USERNAME` Your BotuserName Without `@`. Example `MultiFunctionUse_Bot`
 - `BIFM_URL` Your [BIFM](https://git.gay/a/bifm) instance Url. Default to `https://bifm.tacohitbox.com/api/bypass?url`
+- `DATABASE_URL` Your Mongo Database URL (Connection string). Follow this [guide](https://github.com/missemily22/MultiFunctionBot/blob/main#generate-database) to generate database. 
 - `GDTOT_CRYPT` Put your GDTot Crypt
 - `UNIFIED_EMAIL` Put your Generated Unified Email
 - `UNIFIED_PASS` Put your Generated Unified Pass
@@ -30,7 +31,7 @@
 
 <b>NOTE: Fill the above values in <code>config.env</code> or use them as Environment Variables. </b><br>
 
-# BotFather Commands -
+# BotFather Commands (for General Public Users) -
 ```
 start - Bot Start Message
 help - Alias command for start
@@ -63,6 +64,9 @@ gd - Get GDrive Links for various Drive File Sharer
     /index - Extract Direct Links from Bhadoo Index Folder URLs <br>
     /scrape - Extract Direct Links from Supported Sites <br>
     /gd - Get GDrive Links for various Drive File Sharer <br>
+    /users - Get the bot owner and sudo users list <br>
+    /addsudo - Add a user to the Bot sudo users list <br>
+    /removesudo - Remove a user to the Bot sudo users list <br>
 	</li>
 <br>
 	<li>
@@ -83,6 +87,18 @@ gd - Get GDrive Links for various Drive File Sharer
 </details>
 <br> 
 
+------
+
+### Generate Database
+
+1. Go to `https://mongodb.com/` and sign-up.
+2. Create Shared Cluster.
+3. Press on `Database` under `Deployment` Header, your created cluster will be there.
+5. Press on connect, choose `Allow Access From Anywhere` and press on `Add IP Address` - Put '0.0.0.0', then create user.
+6. After creating user press on `Choose a connection`, then press on `Connect your application`. Choose `Driver` **python** and `version` **3.6 or later**.
+7. Copy your `connection string` and replace `<password>` with the password of your user, then press close.
+
+------
 
 # Contributions - 
 - Thanks to [Sanjit Sinha](https://github.com/sanjit-sinha) for [Telegram-Bot-Boilerplate](https://github.com/sanjit-sinha/Telegram-Bot-Boilerplate) Template

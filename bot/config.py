@@ -46,6 +46,10 @@ if len(users) != 0:
 else:
     SUDO_USERS = set()
 
+DATABASE_URL = environ.get("DATABASE_URL", "")
+if len(DATABASE_URL) == 0:
+    DATABASE_URL = None
+
 UPTOBOX_TOKEN = environ.get("UPTOBOX_TOKEN", "")
 if len(UPTOBOX_TOKEN) == 0:
     LOGGER(__name__).warning("UPTOBOX_TOKEN not provided!")

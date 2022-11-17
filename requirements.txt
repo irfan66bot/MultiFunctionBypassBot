@@ -3,12 +3,14 @@ bs4
 chromedriver_autoinstaller
 cloudscraper
 colorama
+dnspython
 flask
 flask_restful
 lk21
 lxml
 psutil
 PyBypass
+pymongo
 pyrogram
 python-dotenv
 python-telegram-bot

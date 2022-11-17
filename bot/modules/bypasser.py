@@ -83,6 +83,24 @@ def droplink(url):
         return res["msg"]
 
 
+def dulink(url):
+    dom = api_checker()
+    api = f"{dom}/bypass"
+    resp = requests.get(url)
+    if resp.status_code == 404:
+        return "File not found/The link you entered is wrong!"
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    try:
+        resp = client.post(api, json={"type": "dulink", "url": url})
+        res = resp.json()
+    except BaseException:
+        return "Emily API Unresponsive / Invalid Link!"
+    if res["success"] is True:
+        return res["url"]
+    else:
+        return res["msg"]
+
+
 def gplinks(url):
     dom = api_checker()
     api = f"{dom}/bypass"
@@ -192,8 +210,6 @@ def linkvertise(url):
 
 
 def multi_aio(url):
-    dom = api_checker()
-    f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
         return "File not found/The link you entered is wrong!"
@@ -378,6 +394,24 @@ def shareus(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
         resp = client.post(api, json={"type": "shareus", "url": url})
+        res = resp.json()
+    except BaseException:
+        return "Emily API Unresponsive / Invalid Link!"
+    if res["success"] is True:
+        return res["url"]
+    else:
+        return res["msg"]
+
+
+def short2url(url):
+    dom = api_checker()
+    api = f"{dom}/bypass"
+    resp = requests.get(url)
+    if resp.status_code == 404:
+        return "File not found/The link you entered is wrong!"
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    try:
+        resp = client.post(api, json={"type": "short2url", "url": url})
         res = resp.json()
     except BaseException:
         return "Emily API Unresponsive / Invalid Link!"

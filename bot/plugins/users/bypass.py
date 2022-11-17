@@ -61,9 +61,15 @@ async def bypass(_, message: Message):
         text=msg_text, disable_web_page_preview=True, quote=True
     )
     sleep(1)
-    if "droplink." in url or "droplinks." in url:
+    if "adrinolinks." in url:
+        link_type = "AdrinoLinks"
+        res = bypasser.adrinolinks(url)
+    elif "droplink." in url or "droplinks." in url:
         link_type = "DropLinks"
         res = bypasser.droplink(url)
+    elif "dulink." in url:
+        link_type = "Dulink"
+        res = bypasser.dulink(url)
     elif "gplink." in url or "gplinks." in url:
         link_type = "GPLinks"
         res = bypasser.gplinks(url)
@@ -107,6 +113,9 @@ async def bypass(_, message: Message):
     elif "shareus." in url:
         link_type = "Shareus"
         res = bypasser.shareus(url)
+    elif "short2url." in url:
+        link_type = "Short2url"
+        res = bypasser.short2url(url)
     elif "shortingly." in url:
         link_type = "Shortingly"
         res = bypasser.shortingly(url)
@@ -116,9 +125,6 @@ async def bypass(_, message: Message):
     elif "xpshort." in url:
         link_type = "XpShort"
         res = bypasser.xpshort(url)
-    elif "adrinolinks." in url:
-        link_type = "AdrinoLinks"
-        res = bypasser.adrinolinks(url)
     elif any(x in url for x in yandisk_list):
         err = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link Generator</b>\n\n<i>Use it with /direct command followed by Link</i>"
         await msg.edit(text=err)
@@ -140,16 +146,11 @@ async def bypass(_, message: Message):
         await msg.edit(text=err)
         return
     else:
-        if url is not None:
-            try:
-                link_type = "Script Generic"
-                res = bypasser.script(url)
-            except BaseException:
-                err = "<b><i>Could not find Bypass for your URL!</i></b>"
-                await msg.edit(text=err)
-                return
-        else:
-            err = "<b><i>Could not find your URL!</i></b>"
+        try:
+            link_type = "Script Generic"
+            res = bypasser.script(url)
+        except BaseException:
+            err = "<b><i>Could not find Bypass for your URL!</i></b>"
             await msg.edit(text=err)
             return
     LOGGER(__name__).info(f" Received : {cmd} - {link_type} - {url}")

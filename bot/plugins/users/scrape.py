@@ -1,5 +1,5 @@
 from re import search
-from time import sleep, time
+import time
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -7,7 +7,8 @@ from pyrogram.types import Message
 from bot.helpers.decorators import user_commands
 from bot.helpers.functions import get_readable_time
 from bot.logging import LOGGER
-from bot.modules.bypasser import *
+from bot.config import COMMAND_PREFIXES, BOT_USERNAME
+from bot.modules.bypasser import htpmovies, privatemoviez
 from bot.modules.gdrive_direct import pahe
 from bot.modules.lists import *
 from bot.modules.pasting import telegraph_paste
@@ -63,7 +64,7 @@ async def scrape(_, message: Message):
         text=msg_text, disable_web_page_preview=True, quote=True
     )
     LOGGER(__name__).info(f" Received : {cmd} - {url}")
-    sleep(1)
+    time.sleep(1)
     if (
         "workers.dev" in url
         or "0:/" in url
@@ -78,70 +79,70 @@ async def scrape(_, message: Message):
         await msg.edit(text=abc)
         res = index_scrap(url)
         des_url = telegraph_paste(res)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "atishmkv." in url or "atish.mkv" in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>AtishMKV</i>"
         await msg.edit(text=abc)
         des_url = atishmkv_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "cinevez." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Cinevez</i>"
         await msg.edit(text=abc)
         des_url = cinevez_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "cinevood." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Cinevood</i>"
         await msg.edit(text=abc)
         des_url = cinevood_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "filecrypt." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Filecrypt</i>"
         await msg.edit(text=abc)
         des_url = filecrypt_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "htpmovies." in url and "/exit.php?url=" in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>HTP Movies</i>"
         await msg.edit(text=abc)
         des_url = htpmovies(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "igg-games." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>IGG Games</i>"
         await msg.edit(text=abc)
         des_url = igggames_scrape(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "moviesdrama." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Movies Drama</i>"
         await msg.edit(text=abc)
         des_url = moviesdrama_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "olamovies." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>OlaMovies</i>"
         await msg.edit(text=abc)
         des_url = olamovies_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "psa." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>PSA</i>"
         await msg.edit(text=abc)
         """ des_url = psa_scrap(url)
-      time_taken = get_readable_time(time() - start)
+      time_taken = get_readable_time(time.time() - start)
       LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
       xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>" """
         xyz = "<b>PSA Scraper has been patched for now!</b>"
@@ -149,21 +150,21 @@ async def scrape(_, message: Message):
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>ToonWorld4all</i>"
         await msg.edit(text=abc)
         des_url = toonworld4all_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "sharespark." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Sharespark</i>"
         await msg.edit(text=abc)
         des_url = sharespark_scrap(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "privatemoviez." in url and "/secret?data=" in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Privatemoviez</i>"
         await msg.edit(text=abc)
         des_url = privatemoviez(url)
-        time_taken = get_readable_time(time() - start)
+        time_taken = get_readable_time(time.time() - start)
         LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
         xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "pahe." in url:
@@ -203,5 +204,5 @@ async def scrape(_, message: Message):
     else:
         await msg.delete()
         xyz = "This Command does not support this Link!"
-    sleep(1)
+    time.sleep(1)
     await message.reply_text(text=xyz, disable_web_page_preview=True, quote=True)

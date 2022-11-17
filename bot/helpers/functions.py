@@ -101,7 +101,7 @@ def multi_api():
 
 def api_checker():
     api_url = multi_api()
-    r = requests.head(api_url)
+    r = requests.get(api_url)
     if r.status_code == 200:
         LOGGER(__name__).info(f" Using API : {api_url}")
         return api_url

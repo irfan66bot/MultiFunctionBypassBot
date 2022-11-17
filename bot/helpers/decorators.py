@@ -33,6 +33,8 @@ def sudo_commands(func: Callable) -> Callable:
         uid = message.from_user.id
         if uid in SUDO_USERS:
             return await func(client, message)
+        elif uid in OWNER_ID:
+            return await func(client, message)
 
     return decorator
 
