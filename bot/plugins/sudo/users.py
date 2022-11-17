@@ -1,16 +1,12 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from bot.config import (
-    BOT_USERNAME,
-    COMMAND_PREFIXES,
-    OWNER_ID,
-    SUDO_USERS,
-)
+from bot.config import BOT_USERNAME, COMMAND_PREFIXES, OWNER_ID, SUDO_USERS
 from bot.helpers.decorators import sudo_commands
 
 prefixes = COMMAND_PREFIXES
 cmds_user = ["users", f"users@{BOT_USERNAME}"]
+
 
 @Client.on_message(filters.command(cmds_user, **prefixes))
 @sudo_commands
