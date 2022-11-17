@@ -27,14 +27,16 @@ class DatabaseHelper:
             return
         self.__collection.insert_one({"user_id": user_id})
         self.__client.close()
-        return "<b><i>Successfully added to Sudo Users List!</i></b>"
+        LOGGER(__name__).info(f"Added {user_id} to Sudo Users List!")
+        return f"<b><i>Successfully added {user_id} to Sudo Users List!</i></b>"
 
     def unauth_user(self, user_id: int):
         if self.__err:
             return
         self.__collection.delete_many({"user_id": user_id})
         self.__client.close()
-        return "<b><i>Successfully removed to Sudo Users List!</i></b>"
+        LOGGER(__name__).info(f"Removed {user_id} from Sudo Users List!")
+        return f"<b><i>Successfully removed {user_id} from Sudo Users List!</i></b>"
 
     def load_users(self):
         if self.__err:
