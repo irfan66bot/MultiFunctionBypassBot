@@ -1,7 +1,8 @@
 import glob
-import urllib.request
-import img2pdf
 import os
+import urllib.request
+
+import img2pdf
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
@@ -9,10 +10,20 @@ from bot.config import *
 from bot.helpers.decorators import user_commands
 
 opener = urllib.request.build_opener()
-opener.addheaders = [('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'),
-                     ('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'),
-                     ('Accept-Encoding', 'gzip, deflate, br'), ('Accept-Language', 'en-US,en;q=0.5'), ("Connection", "keep-alive"),
-                     ("Upgrade-Insecure-Requests", '1')]
+opener.addheaders = [
+    (
+        "User-Agent",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+    ),
+    (
+        "Accept",
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    ),
+    ("Accept-Encoding", "gzip, deflate, br"),
+    ("Accept-Language", "en-US,en;q=0.5"),
+    ("Connection", "keep-alive"),
+    ("Upgrade-Insecure-Requests", "1"),
+]
 urllib.request.install_opener(opener)
 
 
@@ -65,7 +76,7 @@ async def tgupload(_, message: Message):
     else:
         try:
             address = message.text.split()[1]
-        except:
+        except BaseException:
             await message.reply_text("Please Reply to a Url")
             return
     x = await message.reply_text("Uploading to telegram...")
@@ -85,7 +96,7 @@ async def tgupload(_, message: Message):
             if True:
                 await message.reply_document(address)
         await x.delete()
-    except:
+    except BaseException:
         await message.reply("No such File/Directory/Link")
         return
 
@@ -94,15 +105,17 @@ async def tgupload(_, message: Message):
 @user_commands
 async def takess(_, message: Message):
     try:
-        if len(message.command)!= 2:
+        if len(message.command) != 2:
             await message.reply_text("Give A Url To Fetch Screenshot.")
             return
         url = message.text.split(None, 1)[1]
         m = await message.reply_text("**Taking Screenshot**")
         await m.edit("**Uploading**")
         try:
-            await message.reply_photo(photo=f"https://webshot.amanoteam.com/print?q={url}", quote=False)
-        except:
+            await message.reply_photo(
+                photo=f"https://webshot.amanoteam.com/print?q={url}", quote=False
+            )
+        except BaseException:
             return await m.edit("Sorry, Unable to Generate SS.")
         await m.delete()
     except Exception as e:
