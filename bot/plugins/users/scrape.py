@@ -25,6 +25,9 @@ async def scrape(_, message: Message):
     """
     Extract Direct Links from Supported Sites
     """
+    if len(message.command) != 2:
+        await message.reply_text("Sorry, Could not understand your Input!")
+        return
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
@@ -146,6 +149,20 @@ async def scrape(_, message: Message):
       LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
       xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>" """
         xyz = "<b>PSA Scraper has been patched for now!</b>"
+    elif "taemovies." in url:
+        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>TaeMovies</i>"
+        await msg.edit(text=abc)
+        des_url = taemovies_scrap(url)
+        time_taken = get_readable_time(time.time() - start)
+        LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
+        xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
+    elif "teleguflix." in url:
+        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>TeleguFlix</i>"
+        await msg.edit(text=abc)
+        des_url = teleguflix_scrap(url)
+        time_taken = get_readable_time(time.time() - start)
+        LOGGER(__name__).info(f" Destination : {cmd} - {des_url}")
+        xyz = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
     elif "toonworld4all." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>ToonWorld4all</i>"
         await msg.edit(text=abc)

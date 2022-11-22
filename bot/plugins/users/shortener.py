@@ -21,6 +21,9 @@ async def shorten(_, message: Message):
     """
     Get AdFree Shortened URLs of your Link
     """
+    if len(message.command) != 2:
+        await message.reply_text("Sorry, Could not understand your Input!")
+        return
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message

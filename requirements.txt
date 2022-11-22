@@ -6,6 +6,7 @@ colorama
 dnspython
 flask
 flask_restful
+img2pdf
 lk21
 lxml
 psutil
@@ -15,6 +16,7 @@ pyrogram
 python-dotenv
 python-telegram-bot
 requests
+sapling-py
 selenium
 speedtest-cli
 telegraph

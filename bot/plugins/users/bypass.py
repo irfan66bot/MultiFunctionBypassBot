@@ -22,6 +22,9 @@ async def bypass(_, message: Message):
     """
     Bypass Various Supported Shortened URLs
     """
+    if len(message.command) != 2:
+        await message.reply_text("Sorry, Could not understand your Input!")
+        return
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
@@ -70,9 +73,13 @@ async def bypass(_, message: Message):
     elif "dulink." in url:
         link_type = "Dulink"
         res = bypasser.dulink(url)
+    elif "ez4short." in url:
+        res = bypasser.ez4short(url)
     elif "gplink." in url or "gplinks." in url:
         link_type = "GPLinks"
         res = bypasser.gplinks(url)
+    elif "krownlinks." in url:
+        res = bypasser.krownlinks(url)
     elif any(x in url for x in linkvertise_list):
         link_type = "Linkvertise"
         res = bypasser.linkvertise(url)

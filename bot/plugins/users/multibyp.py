@@ -19,8 +19,11 @@ commands = ["multi", f"multi@{BOT_USERNAME}"]
 @user_commands
 async def multi(_, message: Message):
     """
-    Bypass Short Links using PyBypass Library
+    Bypass Short Links using PyBypass Library and EmilyAPI Multi Endpoint
     """
+    if len(message.command) != 2:
+        await message.reply_text("Sorry, Could not understand your Input!")
+        return
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
@@ -58,7 +61,7 @@ async def multi(_, message: Message):
     LOGGER(__name__).info(f" Received : {cmd} - {url}")
     abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>"
     await message.reply_text(text=abc, disable_web_page_preview=True, quote=True)
-    res = bypasser.multi_pybyp(url)
+    res = bypasser.multi_bypass(url)
     time_taken = get_readable_time(time() - start)
     LOGGER(__name__).info(f" Destination : {cmd} - {res}")
     xyz = f"<b>Bypassed Result :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"

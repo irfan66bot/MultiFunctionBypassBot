@@ -5,7 +5,6 @@ import cloudscraper
 import requests
 from bs4 import BeautifulSoup
 from PyBypass import bypass as pybyp
-from PyBypass.main import BypasserNotFoundError, UnableToBypassError, UrlConnectionError
 
 from bot.config import *
 from bot.helpers.functions import api_checker
@@ -92,6 +91,24 @@ def dulink(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
         resp = client.post(api, json={"type": "dulink", "url": url})
+        res = resp.json()
+    except BaseException:
+        return "Emily API Unresponsive / Invalid Link!"
+    if res["success"] is True:
+        return res["url"]
+    else:
+        return res["msg"]
+
+
+def ez4short(url):
+    dom = api_checker()
+    api = f"{dom}/bypass"
+    resp = requests.get(url)
+    if resp.status_code == 404:
+        return "File not found/The link you entered is wrong!"
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    try:
+        resp = client.post(api, json={"type": "ez4short", "url": url})
         res = resp.json()
     except BaseException:
         return "Emily API Unresponsive / Invalid Link!"
@@ -191,6 +208,24 @@ def hypershort(url):
         return res["msg"]
 
 
+def krownlinks(url):
+    dom = api_checker()
+    api = f"{dom}/bypass"
+    resp = requests.get(url)
+    if resp.status_code == 404:
+        return "File not found/The link you entered is wrong!"
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    try:
+        resp = client.post(api, json={"type": "krownlinks", "url": url})
+        res = resp.json()
+    except BaseException:
+        return "Emily API Unresponsive / Invalid Link!"
+    if res["success"] is True:
+        return res["url"]
+    else:
+        return res["msg"]
+
+
 def linkvertise(url):
     dom = api_checker()
     api = f"{dom}/bypass"
@@ -222,16 +257,26 @@ def multi_aio(url):
         return r.json()["response"]
 
 
-def multi_pybyp(url):
+def multi_bypass(url):
+    resp = requests.get(url)
+    if resp.status_code == 404:
+        return "File not found/The link you entered is wrong!"
+    client = cloudscraper.create_scraper(allow_brotli=False)
     try:
-        f_url = pybyp(url)
-        return f_url
-    except UrlConnectionError:
-        return "Not able to establish a successful connection with given URL. It is probably protected by Cloudfare!"
-    except BypasserNotFoundError:
-        return "Can not find a bypasser script found for this URL."
-    except UnableToBypassError:
-        return "Unable to bypass this link. Possible reason can be cloudfare protection, wrong link, expired link or script is patched!"
+        f_msg = pybyp(url)
+    except Exception:
+        dom = api_checker()
+        api = f"{dom}/multi"
+        try:
+            resp = client.post(api, json={"url": url})
+            res = resp.json()
+        except BaseException:
+            return "Emily API Unresponsive!"
+        if res["success"] is True:
+            f_msg = res["url"]
+        else:
+            f_msg = res["msg"]
+    return f_msg
 
 
 def ouo(url):

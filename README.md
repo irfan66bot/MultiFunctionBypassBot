@@ -35,6 +35,10 @@
 ```
 start - Bot Start Message
 help - Alias command for start
+image2pdf - Convert Image to PDF
+rename - Rename a File in Telegram
+tgupload - Upload a File to Telegram
+takess - Take ScreenShot of a Webpage
 bifm - Bypass Short Links using BIFM API
 direct - Get Direct Link for various Supported URLs
 bypass - Bypass Various Supported Shortened URLs
@@ -54,6 +58,10 @@ gd - Get GDrive Links for various Drive File Sharer
 	<i><b>Users Commands </b></i><br><br>
 	/start - To get the start message.<br>
 	/help - Alias command for start. <br>
+    /image2pdf - Convert Image to PDF <br>
+    /rename - Rename a File in Telegram <br>
+    /tgupload - Upload a File to Telegram <br>
+    /takess - Take ScreenShot of a Webpage <br>
 	/ping - Ping the telegram api server.<br>
     /bifm - Bypass Short Links using BIFM API <br>
     /direct - Get Direct Link for various Supported URLs <br>
