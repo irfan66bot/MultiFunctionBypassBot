@@ -1,6 +1,6 @@
+import datetime
 from re import search
 from time import time
-import datetime
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -66,7 +66,7 @@ async def bifm(client, message: Message):
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
             await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-        except:
+        except BaseException:
             pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
@@ -83,5 +83,5 @@ async def bifm(client, message: Message):
     try:
         msg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Destination URL:</i> {res}\n\n<b><i>Time Taken:</i></b> {time_taken}"
         await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-    except:
+    except BaseException:
         pass

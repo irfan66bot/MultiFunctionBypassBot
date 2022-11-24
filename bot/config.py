@@ -1,5 +1,7 @@
 from os import environ
+
 from dotenv import load_dotenv
+
 from bot.logging import LOGGER
 
 load_dotenv("config.env", override=True)

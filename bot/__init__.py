@@ -1,8 +1,8 @@
-import requests
 import os
 import sys
 import time
 
+import requests
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 
@@ -24,7 +24,9 @@ if len(CONFIG_ENV_URL) != 0:
             with open("config.env", "wb+") as f:
                 f.write(res.content)
         else:
-            LOGGER(__name__).error(f"Failed to load the config.env file [{res.status_code}]")
+            LOGGER(__name__).error(
+                f"Failed to load the config.env file [{res.status_code}]"
+            )
     except Exception as err:
         LOGGER(__name__).error(f"Config ENV URL: {err}")
 else:

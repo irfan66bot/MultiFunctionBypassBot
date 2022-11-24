@@ -14,9 +14,13 @@ from bot.helpers.decorators import user_commands
 opener = urllib.request.build_opener()
 opener.addheaders = [
     (
-        "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"),
+        "User-Agent",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+    ),
     (
-        "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"),
+        "Accept",
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    ),
     ("Accept-Encoding", "gzip, deflate, br"),
     ("Accept-Language", "en-US,en;q=0.5"),
     ("Connection", "keep-alive"),
@@ -45,7 +49,7 @@ async def image2pdf(client, message: Message):
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
             await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-        except:
+        except BaseException:
             pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
@@ -71,7 +75,7 @@ async def rename(client, message: Message):
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
             await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-        except:
+        except BaseException:
             pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
@@ -108,7 +112,7 @@ async def tgupload(client, message: Message):
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
             await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-        except:
+        except BaseException:
             pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
@@ -150,7 +154,7 @@ async def takess(client, message: Message):
                 join_dt = await DatabaseHelper().get_bot_started_on(user_id)
                 msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
                 await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-            except:
+            except BaseException:
                 pass
         last_used_on = await DatabaseHelper().get_last_used_on(user_id)
         if last_used_on != datetime.date.today().isoformat():

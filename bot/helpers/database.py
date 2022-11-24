@@ -98,7 +98,8 @@ class DatabaseHelper:
             return
         self.__cache[user_id]["last_used_on"] = datetime.date.today().isoformat()
         await self.__col.update_one(
-            {"id": user_id}, {"$set": {"last_used_on": datetime.date.today().isoformat()}}
+            {"id": user_id},
+            {"$set": {"last_used_on": datetime.date.today().isoformat()}},
         )
 
     async def get_last_used_on(self, user_id: int):
