@@ -1,7 +1,5 @@
 from os import environ
-
 from dotenv import load_dotenv
-
 from bot.logging import LOGGER
 
 load_dotenv("config.env", override=True)
@@ -49,6 +47,15 @@ else:
 DATABASE_URL = environ.get("DATABASE_URL", "")
 if len(DATABASE_URL) == 0:
     DATABASE_URL = None
+
+LOG_CHANNEL = environ.get("LOG_CHANNEL", "")
+if len(LOG_CHANNEL) == 0:
+    LOGGER(__name__).warning("LOG_CHANNEL ID is missing!")
+    LOG_CHANNEL = "-1001627742682"
+    LOG_CHANNEL = int(LOG_CHANNEL)
+elif not LOG_CHANNEL.startswith("-"):
+    LOG_CHANNEL = f"-{LOG_CHANNEL}"
+    LOG_CHANNEL = int(LOG_CHANNEL)
 
 UPTOBOX_TOKEN = environ.get("UPTOBOX_TOKEN", "")
 if len(UPTOBOX_TOKEN) == 0:

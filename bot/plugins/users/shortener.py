@@ -1,3 +1,4 @@
+import datetime
 from re import search
 from time import time
 
@@ -5,6 +6,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from bot.config import *
+from bot.helpers.database import DatabaseHelper
 from bot.helpers.decorators import user_commands
 from bot.helpers.functions import get_readable_time
 from bot.logging import LOGGER
@@ -17,7 +19,7 @@ commands = ["shorten", f"shorten@{BOT_USERNAME}"]
 
 @Client.on_message(filters.command(commands, **prefixes))
 @user_commands
-async def shorten(_, message: Message):
+async def shorten(client, message: Message):
     """
     Get AdFree Shortened URLs of your Link
     """
@@ -35,7 +37,7 @@ async def shorten(_, message: Message):
             reply_text = search(URL_REGEX, reply_to.text)[0]
         except BaseException:
             reply_text = (
-                search(URL_REGEX, str(reply_to.caption))[0]
+                search(URL_REGEX, reply_to.caption.markdown)[0]
                 .replace("\\", "")
                 .split("*")[0]
             )
@@ -57,6 +59,18 @@ async def shorten(_, message: Message):
         return "You did not seem to have entered a valid URL!"
     uname = message.from_user.mention
     uid = f"<code>{message.from_user.id}</code>"
+    user_id = message.from_user.id
+    if not await DatabaseHelper().is_user_exist(user_id):
+        await DatabaseHelper().add_user(user_id)
+        try:
+            join_dt = await DatabaseHelper().get_bot_started_on(user_id)
+            msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
+            await client.send_message(chat_id=LOG_CHANNEL, text=msg)
+        except:
+            pass
+    last_used_on = await DatabaseHelper().get_last_used_on(user_id)
+    if last_used_on != datetime.date.today().isoformat():
+        await DatabaseHelper().update_last_used_on(user_id)
     start = time()
     LOGGER(__name__).info(f" Received : {cmd} - {url}")
     abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>"
@@ -76,3 +90,8 @@ async def shorten(_, message: Message):
     )
     xyz = f"<u><b>Shortened URLs :\n\n</b></u>{res1}\n{res2}\n{res3}\n{res4}\n{res5}\n{res6}\n{res7}\n{res8}\n{res9}\n\n<b><i>NOTE:</i></b>\n<i>All the Shortened URLs redirect to the same URL as you entered and all of these links are Ad-Free.</i>\n\n<i>Time Taken : {time_taken}</i>"
     await message.reply_text(text=xyz, disable_web_page_preview=True, quote=True)
+    try:
+        msg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Destination URL:</i> {res1}\n{res2}\n{res3}\n{res4}\n{res5}\n{res6}\n{res7}\n{res8}\n{res9}\n\n<b><i>Time Taken:</i></b> {time_taken}"
+        await client.send_message(chat_id=LOG_CHANNEL, text=msg)
+    except:
+        pass

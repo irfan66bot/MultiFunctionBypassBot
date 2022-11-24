@@ -29,7 +29,7 @@ async def sudo_user(_, message: Message):
         if user_id in SUDO_USERS:
             msg = f"<b><i>Already in Sudo Users List!</i></b>"
         elif DATABASE_URL is not None:
-            msg = DatabaseHelper().auth_user(user_id)
+            msg = await DatabaseHelper().auth_user(user_id)
             SUDO_USERS.add(user_id)
         else:
             SUDO_USERS.add(user_id)
@@ -57,7 +57,7 @@ async def rmsudo_user(_, message: Message):
     if user_id:
         if user_id in SUDO_USERS:
             if DATABASE_URL is not None:
-                msg = DatabaseHelper().unauth_user(user_id)
+                msg = await DatabaseHelper().unauth_user(user_id)
             else:
                 LOGGER(__name__).info(f"Removed {user_id} from Sudo Users List!")
                 msg = f"<b><i>Successfully removed {user_id} from Sudo Users List!</i></b>"

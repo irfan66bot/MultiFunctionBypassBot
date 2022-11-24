@@ -1,9 +1,11 @@
+import datetime
 from re import search
 from time import sleep, time
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
+from bot.helpers.database import DatabaseHelper
 from bot.helpers.decorators import user_commands
 from bot.helpers.functions import get_readable_time
 from bot.logging import LOGGER
@@ -16,7 +18,7 @@ commands = ["gd", f"gd@{BOT_USERNAME}"]
 
 @Client.on_message(filters.command(commands, **prefixes))
 @user_commands
-async def gd(_, message: Message):
+async def gd(client, message: Message):
     """
     Get GDrive Links for various Drive File Sharer
     """
@@ -34,7 +36,7 @@ async def gd(_, message: Message):
             reply_text = search(URL_REGEX, reply_to.text)[0]
         except BaseException:
             reply_text = (
-                search(URL_REGEX, str(reply_to.caption))[0]
+                search(URL_REGEX, reply_to.caption.markdown)[0]
                 .replace("\\", "")
                 .split("*")[0]
             )
@@ -56,6 +58,18 @@ async def gd(_, message: Message):
         return "You did not seem to have entered a valid URL!"
     uname = message.from_user.mention
     uid = f"<code>{message.from_user.id}</code>"
+    user_id = message.from_user.id
+    if not await DatabaseHelper().is_user_exist(user_id):
+        await DatabaseHelper().add_user(user_id)
+        try:
+            join_dt = await DatabaseHelper().get_bot_started_on(user_id)
+            msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
+            await client.send_message(chat_id=LOG_CHANNEL, text=msg)
+        except:
+            pass
+    last_used_on = await DatabaseHelper().get_last_used_on(user_id)
+    if last_used_on != datetime.date.today().isoformat():
+        await DatabaseHelper().update_last_used_on(user_id)
     start = time()
     msg_text = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Processing your URL.....</b>"
     msg = await message.reply_text(
@@ -118,3 +132,8 @@ async def gd(_, message: Message):
         xyz = "This Command does not support this Link!"
     sleep(1)
     await message.reply_text(text=xyz, disable_web_page_preview=True, quote=True)
+    try:
+        msg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Destination URL:</i> {res}\n\n<b><i>Time Taken:</i></b> {time_taken}"
+        await client.send_message(chat_id=LOG_CHANNEL, text=msg)
+    except:
+        pass

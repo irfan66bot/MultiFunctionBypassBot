@@ -1,4 +1,3 @@
-
 # Set app name below, replace APP-NAME
 
 app = "APP-NAME"
@@ -7,32 +6,7 @@ kill_timeout = 5
 processes = []
 
 [env]
-  API_ID = 0
-  API_HASH = ""
-  BOT_TOKEN = ""
-  BOT_USERNAME = ""
-  COMMAND_PREFIXES = "! . /" # Add values seperated by space
-  OWNER_ID = "5074446688 1691209696" # Add values seperated by space
-  SUDO_USERS = "5074446688 1691209696" # Add values seperated by space
-  BIFM_URL = "https://bifm.tacohitbox.com/api/bypass?url"
-  EMILY_API_URL = "https://api.emilyx.in/api https://emilyapi.fly.dev/api https://emily-api.fly.dev/api"  # Add values seperated by space
-  UPTOBOX_TOKEN = ""
-  MAX_MESSAGE_LENGTH = 4096
-  UPSTREAM_REPO = "https://github.com/missemily22/MultiFunctionBot.git"
-  DATABASE_URL = ""
-  UNIFIED_EMAIL = ""
-  UNIFIED_PASS = ""
-  GDTOT_CRYPT = ""
-  HUBDRIVE_CRYPT = ""
-  KATDRIVE_CRYPT = ""
-  KOLOP_CRYPT = ""
-  DRIVEFIRE_CRYPT = ""
-  DRIVEBUZZ_CRYPT = ""
-  DRIVEHUB_CRYPT = ""
-  GADRIVE_CRYPT = ""
-  JIODRIVE_CRYPT = ""
-  Sharerpw_XSRF = ""
-  Sharerpw_laravel = ""
+  CONFIG_ENV_URL = ""
 
 # No need to touch below
 

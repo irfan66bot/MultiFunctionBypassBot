@@ -2,6 +2,7 @@
 
 > # Environment Variables
 
+- `CONFIG_ENV_URL` Put your Config File URL so that it works as Bot Config
 - `API_HASH` Your API Hash from [my.telegram.org](https://my.telegram.org)
 - `API_ID` Your API ID from [my.telegram.org](https://my.telegram.org)
 - `BOT_TOKEN` Your bot token from [@BotFather](https://telegram.dog/BotFather)
@@ -11,6 +12,7 @@
 - `BOT_USERNAME` Your BotuserName Without `@`. Example `MultiFunctionUse_Bot`
 - `BIFM_URL` Your [BIFM](https://git.gay/a/bifm) instance Url. Default to `https://bifm.tacohitbox.com/api/bypass?url`
 - `DATABASE_URL` Your Mongo Database URL (Connection string). Follow this [guide](https://github.com/missemily22/MultiFunctionBot/blob/main#generate-database) to generate database. 
+- `LOG_CHANNEL` Your Log Channel ID where the Bot which store Critical Information. Starts with "-"
 - `GDTOT_CRYPT` Put your GDTot Crypt
 - `UNIFIED_EMAIL` Put your Generated Unified Email
 - `UNIFIED_PASS` Put your Generated Unified Pass
@@ -31,7 +33,7 @@
 
 <b>NOTE: Fill the above values in <code>config.env</code> or use them as Environment Variables. </b><br>
 
-# BotFather Commands (for General Public Users) -
+# BotFather Commands (for Public Users) -
 ```
 start - Bot Start Message
 help - Alias command for start
@@ -72,25 +74,25 @@ gd - Get GDrive Links for various Drive File Sharer
     /index - Extract Direct Links from Bhadoo Index Folder URLs <br>
     /scrape - Extract Direct Links from Supported Sites <br>
     /gd - Get GDrive Links for various Drive File Sharer <br>
-    /users - Get the bot owner and sudo users list <br>
-    /addsudo - Add a user to the Bot sudo users list <br>
+	</li>
+<br>
+    <li>
+    <i><b>Sudo User Commands </b></i><br><br>
+    /speedtest: Check the internet speed of bot server.<br>
+    /serverstats: Get the stats of server.<br>
+    /stats: Alias command for serverstats.<br>
+    /users - Get details about the Bot Users <br>
+    </li>
+<br>
+    <li>
+    <i><b>Developer Commands </b></i><br><br> 
+	/addsudo - Add a user to the Bot sudo users list <br>
     /removesudo - Remove a user to the Bot sudo users list <br>
-	</li>
-<br>
-	<li>
-	<i><b>Sudo User Commands </b></i><br><br>
-	/speedtest: Check the internet speed of bot server.<br>
-	/serverstats: Get the stats of server.<br>
-	/stats: Alias command for serverstats.<br>
-	</li>
-<br>
-	<li>
-	<i><b>Developer Commands </b></i><br><br> 
-	/shell: To run the terminal commands via bot.<br>
-	/exec: To run the python commands via bot. <br>
-	/update: To update the bot to latest commit from UpStream Repositorys. <br> 
-	/restart: Restart the bot. <br>
-	/log: To get the log file of bot. <br>
+    /shell: To run the terminal commands via bot.<br>
+    /exec: To run the python commands via bot. <br>
+    /update: To update the bot to latest commit from UpStream Repositorys. <br> 
+    /restart: Restart the bot. <br>
+    /log: To get the log file of bot. <br>
 </ul>
 </details>
 <br> 
