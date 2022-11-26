@@ -51,9 +51,9 @@ class Broadcast:
             return 500, f"{user_id} : {traceback.format_exc()}\n"
 
     async def start(self):
-        all_users = await DatabaseHelper.get_all_users()
+        all_users = await DatabaseHelper().get_all_users()
         start_time = time.time()
-        total_users = await DatabaseHelper.total_users_count()
+        total_users = await DatabaseHelper().total_users_count()
         done = 0
         failed = 0
         success = 0
@@ -70,7 +70,7 @@ class Broadcast:
             else:
                 failed += 1
             if sts == 400:
-                await DatabaseHelper.delete_user(user["id"])
+                await DatabaseHelper().delete_user(user["id"])
             done += 1
             self.progress.update(dict(current=done, failed=failed, success=success))
             if self.cancelled:

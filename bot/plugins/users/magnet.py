@@ -2,13 +2,13 @@ import datetime
 from re import search
 from time import time
 
-from pyrogram import Client, filters
+from pyrogram import Client, enums, filters
 from pyrogram.types import Message
 
 from bot.config import *
 from bot.helpers.database import DatabaseHelper
 from bot.helpers.decorators import user_commands
-from bot.helpers.functions import get_readable_time
+from bot.helpers.functions import get_readable_time, forcesub
 from bot.logging import LOGGER
 from bot.modules import scraper
 from bot.modules.regex import URL_REGEX, is_a_url
@@ -23,13 +23,18 @@ async def magnet(client, message: Message):
     """
     Extract Magnet from Torrent Websites
     """
-    if len(message.command) != 2:
-        await message.reply_text("Sorry, Could not understand your Input!")
+    fsub = await forcesub(client, message)
+    if not fsub:
         return
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
+    cmd = ""
+    url = ""
     if len(msg_args) > 1:
+        if len(message.command) != 2:
+            await message.reply_text("Sorry, Could not understand your Input!")
+            return
         cmd = msg_args[0]
         url = msg_args[1]
     elif reply_to is not None:
@@ -43,20 +48,17 @@ async def magnet(client, message: Message):
             )
         url = reply_text.strip()
         cmd = msg_args[0]
-    elif msg_args.count == (0 or 1) or reply_to is None:
-        return "Bot could not retrieve your Input!"
-
-    if url is not None:
-        if url.startswith("http://"):
-            url = url.replace("http://", "https://")
-        elif not url.startswith("https://"):
-            url = "https://" + url
-    else:
-        return "Bot could not retrieve your URL!"
+    elif message.command == (0 or 1) or reply_to is None:
+        err = "<b><i>Please send a URL or reply to an URL to proceed!</i></b>"
+        await message.reply_text(text=err, disable_web_page_preview=True, quote=True)
+        return
 
     valid_url = is_a_url(url)
     if valid_url is not True:
-        return "You did not seem to have entered a valid URL!"
+        err = "<b><i>You did not seem to have entered a valid URL!</i></b>"
+        await message.reply_text(text=err, disable_web_page_preview=True, quote=True)
+        return
+
     uname = message.from_user.mention
     uid = f"<code>{message.from_user.id}</code>"
     user_id = message.from_user.id
@@ -65,8 +67,9 @@ async def magnet(client, message: Message):
         try:
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
-            await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-        except BaseException:
+            await client.send_message(chat_id=LOG_CHANNEL, text=msg, parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
+        except Exception as err:
+            LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
             pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
@@ -82,6 +85,7 @@ async def magnet(client, message: Message):
     await message.reply_text(text=xyz, disable_web_page_preview=True, quote=True)
     try:
         msg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Destination URL:</i> {res}\n\n<b><i>Time Taken:</i></b> {time_taken}"
-        await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-    except BaseException:
+        await client.send_message(chat_id=LOG_CHANNEL, text=msg, parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
+    except Exception as err:
+        LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
         pass

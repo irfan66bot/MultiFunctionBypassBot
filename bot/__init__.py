@@ -2,7 +2,6 @@ import os
 import sys
 import time
 
-import requests
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 
@@ -16,21 +15,6 @@ if os.path.exists("log.txt"):
     with open("log.txt", "r+") as f:
         f.truncate(0)
 
-CONFIG_ENV_URL = os.environ.get("CONFIG_ENV_URL", "")
-if len(CONFIG_ENV_URL) != 0:
-    try:
-        res = requests.get(CONFIG_ENV_URL)
-        if res.status_code == 200:
-            with open("config.env", "wb+") as f:
-                f.write(res.content)
-        else:
-            LOGGER(__name__).error(
-                f"Failed to load the config.env file [{res.status_code}]"
-            )
-    except Exception as err:
-        LOGGER(__name__).error(f"Config ENV URL: {err}")
-else:
-    LOGGER(__name__).warning("Config ENV URL Not Provided, Proceeding without it!")
 
 if sys.version_info[0] < 3 or sys.version_info[1] < 7:
     VERSION_ASCII = """

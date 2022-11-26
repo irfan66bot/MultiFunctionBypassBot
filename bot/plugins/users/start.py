@@ -1,14 +1,14 @@
 import datetime
 import time
 
-from pyrogram import Client, filters
+from pyrogram import Client, enums, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from bot import BotStartTime
 from bot.config import *
 from bot.helpers.database import DatabaseHelper
 from bot.helpers.decorators import user_commands
-from bot.helpers.functions import get_readable_time
+from bot.helpers.functions import get_readable_time, forcesub
 from bot.version import (
     __bot_version__,
     __gitrepo__,
@@ -130,6 +130,9 @@ commands = ["start", f"start@{BOT_USERNAME}", "help", f"help@{BOT_USERNAME}"]
 @Client.on_message(filters.command(commands, **prefixes))
 @user_commands
 async def start(client, message):
+    fsub = await forcesub(client, message)
+    if not fsub:
+        return
     botuptime = get_readable_time(time.time() - BotStartTime)
     user_id = message.from_user.id
     if not await DatabaseHelper().is_user_exist(user_id):
@@ -137,8 +140,9 @@ async def start(client, message):
         try:
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
-            await client.send_message(chat_id=LOG_CHANNEL, text=msg)
-        except BaseException:
+            await client.send_message(chat_id=LOG_CHANNEL, text=msg, parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
+        except Exception as err:
+            LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
             pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():

@@ -1,18 +1,17 @@
 import random
 
-import requests
-from pyrogram.enums import ChatMemberStatus, ChatType
-from pyrogram.types import Message
+from pyrogram.enums import ChatMemberStatus, ChatType, ParseMode
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import UserNotParticipant
 
 from bot.config import *
-from bot.config import EMILY_API_URL
+from bot.logging import LOGGER
 
 
 async def isAdmin(message: Message) -> bool:
     """
     Return True if the message is from owner or admin of the group or sudo of the bot.
     """
-
     if not message.from_user:
         return False
     if message.chat.type not in [ChatType.SUPERGROUP, ChatType.CHANNEL]:
@@ -33,6 +32,45 @@ async def isAdmin(message: Message) -> bool:
     else:
         return False
 
+
+async def forcesub(client, message: Message) -> bool:
+    """
+    Returns True if user is subscribed to Said Channel else returns False
+    """
+    if FORCESUB_ENABLE and (FORCESUB_CHANNEL and FORCESUB_CHANNEL_UNAME and BOTOWNER_UNAME)!= None and message.chat.type in ChatType.PRIVATE:
+        try:
+            user = await client.get_chat_member(FORCESUB_CHANNEL, message.chat.id)
+            if user.status == "kicked":
+                await client.send_message(
+                    chat_id=message.chat.id,
+                    text=f"<b><i>Sorry, You are banned from the Channel {FORCESUB_CHANNEL_UNAME} and hence cannot use the Bot.\nContact {BOTOWNER_UNAME}</i></b>",
+                    parse_mode=ParseMode.HTML,
+                    disable_web_page_preview=True
+                )
+                return False
+        except UserNotParticipant:
+            await client.send_message(
+                chat_id=message.chat.id,
+                text="<b>Join the channel below to use the Bot 🔐</b>\n\n<i>Resend the command along with link after you have successfully joined...</i>",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("Join🔓", url=f"https://t.me/{FORCESUB_CHANNEL_UNAME}"),
+                            InlineKeyboardButton("Owner🔓", url=f"https://t.me/{BOTOWNER_UNAME}")
+                        ]
+                    ]
+                ),
+                parse_mode=ParseMode.HTML
+            )
+            return False
+        except Exception as err:
+            await client.send_message(
+                chat_id=message.chat.id,
+                text=f"<i>Something went wrong in ForceSub Module\nContact {BOTOWNER_UNAME}</i>\n\n{err}",
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True)
+            return False
+    return True
 
 def get_readable_time(seconds: int) -> str:
     """

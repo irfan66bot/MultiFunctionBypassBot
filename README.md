@@ -13,6 +13,10 @@
 - `BIFM_URL` Your [BIFM](https://git.gay/a/bifm) instance Url. Default to `https://bifm.tacohitbox.com/api/bypass?url`
 - `DATABASE_URL` Your Mongo Database URL (Connection string). Follow this [guide](https://github.com/missemily22/MultiFunctionBot/blob/main#generate-database) to generate database. 
 - `LOG_CHANNEL` Your Log Channel ID where the Bot which store Critical Information. Starts with "-"
+- `BOTOWNER_UNAME` Username Name of the Bot Owner (without `@`)
+- `FORCESUB_ENABLE` Set to True if you want to enable ForceSubscribe else set to False/None
+- `FORCESUB_CHANNEL` ID of the Channel you want ForceSubscribe
+- `FORCESUB_CHANNEL_UNAME` Username of the Channel you want ForceSubscribe (without `@`)
 - `GDTOT_CRYPT` Put your GDTot Crypt
 - `UNIFIED_EMAIL` Put your Generated Unified Email
 - `UNIFIED_PASS` Put your Generated Unified Pass
