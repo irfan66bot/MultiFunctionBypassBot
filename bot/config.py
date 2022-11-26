@@ -1,7 +1,6 @@
-import requests
-
 from os import environ
 
+import requests
 from dotenv import load_dotenv
 
 from bot.logging import LOGGER
@@ -78,7 +77,7 @@ elif not LOG_CHANNEL.startswith("-"):
 else:
     LOG_CHANNEL = int(LOG_CHANNEL)
 
-FORCESUB_ENABLE = environ.get('FORCESUB_ENABLE')
+FORCESUB_ENABLE = environ.get("FORCESUB_ENABLE")
 if FORCESUB_ENABLE is (False or None):
     FORCESUB_ENABLE = False
     LOGGER(__name__).warning("ForceSub is Disabled!")

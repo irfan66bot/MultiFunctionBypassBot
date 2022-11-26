@@ -64,7 +64,16 @@ class DatabaseHelper:
         if self.__err:
             return
         user = self.new_user(user_id)
-        self.__collection.update_one({"id": user["id"]}, {"$set": {"join_date": user["join_date"], "last_used_on": user["last_used_on"]}}, upsert=True)
+        self.__collection.update_one(
+            {"id": user["id"]},
+            {
+                "$set": {
+                    "join_date": user["join_date"],
+                    "last_used_on": user["last_used_on"],
+                }
+            },
+            upsert=True,
+        )
         self.__client.close()
 
     async def is_user_exist(self, user_id: int):
@@ -99,7 +108,8 @@ class DatabaseHelper:
             return
         self.__collection.update_one(
             {"id": user_id},
-            {"$set": {"last_used_on": datetime.date.today().isoformat()}}, upsert=True
+            {"$set": {"last_used_on": datetime.date.today().isoformat()}},
+            upsert=True,
         )
         self.__client.close()
 

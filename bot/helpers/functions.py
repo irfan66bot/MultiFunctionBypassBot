@@ -1,8 +1,8 @@
 import random
 
 from pyrogram.enums import ChatMemberStatus, ChatType, ParseMode
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import UserNotParticipant
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from bot.config import *
 from bot.logging import LOGGER
@@ -37,7 +37,11 @@ async def forcesub(client, message: Message) -> bool:
     """
     Returns True if user is subscribed to Said Channel else returns False
     """
-    if FORCESUB_ENABLE and (FORCESUB_CHANNEL and FORCESUB_CHANNEL_UNAME and BOTOWNER_UNAME)!= None and message.chat.type in ChatType.PRIVATE:
+    if (
+        FORCESUB_ENABLE
+        and (FORCESUB_CHANNEL and FORCESUB_CHANNEL_UNAME and BOTOWNER_UNAME) is not None
+        and message.chat.type in ChatType.PRIVATE
+    ):
         try:
             user = await client.get_chat_member(FORCESUB_CHANNEL, message.chat.id)
             if user.status == "kicked":
@@ -45,7 +49,7 @@ async def forcesub(client, message: Message) -> bool:
                     chat_id=message.chat.id,
                     text=f"<b><i>Sorry, You are banned from the Channel {FORCESUB_CHANNEL_UNAME} and hence cannot use the Bot.\nContact {BOTOWNER_UNAME}</i></b>",
                     parse_mode=ParseMode.HTML,
-                    disable_web_page_preview=True
+                    disable_web_page_preview=True,
                 )
                 return False
         except UserNotParticipant:
@@ -55,12 +59,16 @@ async def forcesub(client, message: Message) -> bool:
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("Join🔓", url=f"https://t.me/{FORCESUB_CHANNEL_UNAME}"),
-                            InlineKeyboardButton("Owner🔓", url=f"https://t.me/{BOTOWNER_UNAME}")
+                            InlineKeyboardButton(
+                                "Join🔓", url=f"https://t.me/{FORCESUB_CHANNEL_UNAME}"
+                            ),
+                            InlineKeyboardButton(
+                                "Owner🔓", url=f"https://t.me/{BOTOWNER_UNAME}"
+                            ),
                         ]
                     ]
                 ),
-                parse_mode=ParseMode.HTML
+                parse_mode=ParseMode.HTML,
             )
             return False
         except Exception as err:
@@ -68,9 +76,11 @@ async def forcesub(client, message: Message) -> bool:
                 chat_id=message.chat.id,
                 text=f"<i>Something went wrong in ForceSub Module\nContact {BOTOWNER_UNAME}</i>\n\n{err}",
                 parse_mode=ParseMode.HTML,
-                disable_web_page_preview=True)
+                disable_web_page_preview=True,
+            )
             return False
     return True
+
 
 def get_readable_time(seconds: int) -> str:
     """

@@ -48,10 +48,14 @@ async def image2pdf(client, message: Message):
         try:
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
-            await client.send_message(chat_id=LOG_CHANNEL, text=msg, parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
+            await client.send_message(
+                chat_id=LOG_CHANNEL,
+                text=msg,
+                parse_mode=enums.ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
         except Exception as err:
             LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
-            pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
         await DatabaseHelper().update_last_used_on(user_id)
@@ -75,10 +79,14 @@ async def rename(client, message: Message):
         try:
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
-            await client.send_message(chat_id=LOG_CHANNEL, text=msg, parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
+            await client.send_message(
+                chat_id=LOG_CHANNEL,
+                text=msg,
+                parse_mode=enums.ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
         except Exception as err:
             LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
-            pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
         await DatabaseHelper().update_last_used_on(user_id)
@@ -113,10 +121,14 @@ async def tgupload(client, message: Message):
         try:
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
             msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
-            await client.send_message(chat_id=LOG_CHANNEL, text=msg, parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
+            await client.send_message(
+                chat_id=LOG_CHANNEL,
+                text=msg,
+                parse_mode=enums.ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
         except Exception as err:
             LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
-            pass
     last_used_on = await DatabaseHelper().get_last_used_on(user_id)
     if last_used_on != datetime.date.today().isoformat():
         await DatabaseHelper().update_last_used_on(user_id)
@@ -156,7 +168,12 @@ async def takess(client, message: Message):
             try:
                 join_dt = await DatabaseHelper().get_bot_started_on(user_id)
                 msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
-                await client.send_message(chat_id=LOG_CHANNEL, text=msg, parse_mode=enums.ParseMode.HTML, disable_web_page_preview=True)
+                await client.send_message(
+                    chat_id=LOG_CHANNEL,
+                    text=msg,
+                    parse_mode=enums.ParseMode.HTML,
+                    disable_web_page_preview=True,
+                )
             except BaseException:
                 pass
         last_used_on = await DatabaseHelper().get_last_used_on(user_id)
