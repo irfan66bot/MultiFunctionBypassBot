@@ -68,5 +68,9 @@ def is_fichier_link(url: str):
 
 
 def is_sendcm_folder_link(url: str):
-    return ("https://send.cm/s/" or "https://send.cm/?sort" or "https://send.cm/?sort_field" or "https://send.cm/?sort_order") in url
-
+    return (
+        "https://send.cm/s/"
+        or "https://send.cm/?sort"
+        or "https://send.cm/?sort_field"
+        or "https://send.cm/?sort_order"
+    ) in url

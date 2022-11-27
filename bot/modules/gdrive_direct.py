@@ -31,7 +31,7 @@ async def gdtot(url: str) -> str:
     else:
         try:
             decoded_id = base64.b64decode(str(params["gd"][0])).decode("utf-8")
-        except:
+        except BaseException:
             return "Something went wrong. Could not generate GDrive URL for your GDTot Link"
     drive_link = f"https://drive.google.com/open?id={decoded_id}"
     return drive_link
@@ -97,15 +97,15 @@ async def unified(url: str) -> str:
             flink = info_parsed["gdrive_link"]
             return flink
         elif urlparse(url).netloc in (
-                "driveapp.in",
-                "drivehub.in",
-                "gdflix.pro",
-                "gdflix.top",
-                "drivesharer.in",
-                "drivebit.in",
-                "drivelinks.in",
-                "driveace.in",
-                "drivepro.in",
+            "driveapp.in",
+            "drivehub.in",
+            "gdflix.pro",
+            "gdflix.top",
+            "drivesharer.in",
+            "drivebit.in",
+            "drivelinks.in",
+            "driveace.in",
+            "drivepro.in",
         ):
             res = client.get(info_parsed["gdrive_link"])
             drive_link = etree.HTML(res.content).xpath(

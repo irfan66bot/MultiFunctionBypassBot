@@ -247,28 +247,38 @@ async def bypass(client, message: Message):
         sleep(1)
         await send_bypass_message2(start, cmd, res, message, uid, url, client)
     elif any(x in url for x in yandisk_list):
-        err3 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err3 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err3)
         return
     elif any(x in url for x in fmed_list):
-        err4 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err4 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err4)
         return
     elif any(x in url for x in sbembed_list):
-        err5 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err5 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err5)
         return
     elif any(x in url for x in directdl_list):
-        err6 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err6 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err6)
         return
     elif any(x in url for x in scrape_list):
-        err7 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Site Scraper</b>\n\n<i>Use it " \
-               f"with /scrape command followed by Link</i> "
+        err7 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Site Scraper</b>\n\n<i>Use it "
+            f"with /scrape command followed by Link</i> "
+        )
         await msg.edit(text=err7)
         return
     else:

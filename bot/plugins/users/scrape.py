@@ -26,7 +26,9 @@ async def send_scrape_message(uname, uid, url, link_type, msg):
     await msg.edit(text=a)
 
 
-async def send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client):
+async def send_scrape_message2(
+    start, cmd, link_type, des_url, message, uid, url, client
+):
     time_taken = get_readable_time(time.time() - start)
     LOGGER(__name__).info(f" Destination : {cmd} - {link_type} - {des_url}")
     b = f"<b>Telegraph URL(with Result):\n</b> {des_url}\n\n<i>Time Taken : {time_taken}</i>"
@@ -117,47 +119,65 @@ async def scrape(client, message: Message):
         await send_scrape_message(uname, uid, url, link_type, msg)
         res = index_scrap(url)
         des_url = await telegraph_paste(res)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "atishmkv." in url or "atish.mkv" in url:
         link_type = "AtishMKV"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await atishmkv_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "cinevez." in url:
         link_type = "Cinevez"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await cinevez_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "cinevood." in url:
         link_type = "Cinevood"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await cinevood_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "filecrypt." in url:
         link_type = "FileCrypt"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await filecrypt_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "htpmovies." in url and "/exit.php?url=" in url:
         link_type = "HTPMovies DL"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await htpmovies(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "igg-games." in url:
         link_type = "IGG Games"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await igggames_scrape(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "moviesdrama." in url:
         link_type = "MoviesDrama"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await moviesdrama_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "olamovies." in url:
         link_type = "OlaMovies"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await olamovies_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "psa." in url:
         abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>PSA</i>"
         await msg.edit(text=abc)
@@ -171,65 +191,91 @@ async def scrape(client, message: Message):
         link_type = "TaeMovies"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await taemovies_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "teleguflix." in url:
         link_type = "TeleguFlix"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await teleguflix_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "toonworld4all." in url:
         link_type = "ToonWorld4All"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await toonworld4all_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "sharespark." in url:
         link_type = "Sharerspark"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await sharespark_scrap(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "privatemoviez." in url and "/secret?data=" in url:
         link_type = "PrivateMoviez DL"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = await privatemoviez(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif "pahe." in url:
         link_type = "Pahe"
         await send_scrape_message(uname, uid, url, link_type, msg)
         des_url = pahe(url)
-        await send_scrape_message2(start, cmd, link_type, des_url, message, uid, url, client)
+        await send_scrape_message2(
+            start, cmd, link_type, des_url, message, uid, url, client
+        )
     elif any(x in url for x in yandisk_list):
-        err3 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err3 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err3)
         return
     elif any(x in url for x in fmed_list):
-        err4 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err4 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err4)
         return
     elif any(x in url for x in sbembed_list):
-        err5 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err5 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err5)
         return
     elif any(x in url for x in directdl_list):
-        err6 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link " \
-               f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        err6 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Direct Link "
+            f"Generator</b>\n\n<i>Use it with /direct command followed by Link</i> "
+        )
         await msg.edit(text=err6)
         return
     elif any(x in url for x in linkvertise_list):
-        err7 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link " \
-               f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        err7 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link "
+            f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        )
         await msg.edit(text=err7)
         return
     elif any(x in url for x in bypass_list):
-        err8 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link " \
-               f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        err8 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link "
+            f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        )
         await msg.edit(text=err8)
         return
     elif any(x in url for x in adfly_list):
-        err9 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link " \
-               f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        err9 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link "
+            f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        )
         await msg.edit(text=err9)
         return
     else:

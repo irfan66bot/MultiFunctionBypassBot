@@ -25,7 +25,9 @@ async def send_dirlink_message(cmd, link_type, url, uname, uid, msg):
     await msg.edit(text=a)
 
 
-async def send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client):
+async def send_dirlink_message2(
+    start, cmd, res, link_type, uname, uid, message, url, client
+):
     time_taken = get_readable_time(time() - start)
     LOGGER(__name__).info(f" Destination : {cmd} - {res}")
     if link_type == "GoFile":
@@ -36,10 +38,10 @@ async def send_dirlink_message2(start, cmd, res, link_type, uname, uid, message,
             f"<b><u>NOTE : </u></b>\n<i>MegaUp has Cloudflare Protection Enabled.So Do not use this Link in Mirror Bots.Use it from your Device and downloading will start.</i>"
         )
     elif (
-            link_type == "Bunkr.is"
-            or link_type == "CyberDrop"
-            or link_type == "Pixl.is"
-            or link_type == "Sendcm Folder"
+        link_type == "Bunkr.is"
+        or link_type == "CyberDrop"
+        or link_type == "Pixl.is"
+        or link_type == "Sendcm Folder"
     ):
         b = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b><i>Your Telegraph URL (containing Result) is :\n</i></b>{res}\n\n<i>Time Taken : {time_taken}</i>"
     else:
@@ -130,7 +132,9 @@ async def direct(client, message: Message):
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.artstation(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "mdisk." in url:
         link_type = "MDisk"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
@@ -156,237 +160,315 @@ async def direct(client, message: Message):
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.wetransfer(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "gdbot." in url:
         link_type = "GDBot"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.gdbot(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "gofile." in url:
         link_type = "GoFile"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         # res = await direct_link.gofile(url)
         res = url  # Temporary Solution
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "megaup." in url:
         link_type = "MegaUp"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.megaup(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "sfile.mobi" in url:
         link_type = "Sfile.mobi"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.sfile(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif any(x in url for x in yandisk_list):
         link_type = "Yandex Disk"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.yandex_disk(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "osdn." in url:
         link_type = "OSDN"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.osdn(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "github.com" in url:
         link_type = "Github"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.github(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "mediafire." in url:
         link_type = "MediaFire"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.mediafire(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "zippyshare." in url:
         link_type = "ZippyShare"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.zippyshare(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "hxfile." in url:
         link_type = "HXFile"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.hxfile(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "files.im" in url:
         link_type = "FilesIm"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.filesIm(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "anonfiles." in url:
         link_type = "AnonFiles"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.anonfiles(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "letsupload." in url:
         link_type = "LetsUpload"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.letsupload(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "linkpoi." in url:
         link_type = "LinkPoi"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.linkpoi(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif any(x in url for x in fmed_list):
         link_type = "Fembed"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.fembed(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif any(x in url for x in sbembed_list):
         link_type = "SBEmbed"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.sbembed(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "mirrored." in url:
         link_type = "Mirrored"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.mirrored(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "reupload." in url:
         link_type = "ReUpload"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.reupload(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "uservideo." in url:
         link_type = "UserVideo"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.uservideo(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "antfiles." in url:
         link_type = "AntFiles"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.antfiles(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "streamtape." in url:
         link_type = "StreamTape"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.streamtape(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "sourceforge" in url:
         link_type = "SourceForge"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         if "master.dl.sourceforge.net" in url:
             res = await direct_link.sourceforge2(url)
             sleep(1)
-            await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+            await send_dirlink_message2(
+                start, cmd, res, link_type, uname, uid, message, url, client
+            )
         else:
             res = await direct_link.sourceforge(url)
             sleep(1)
-            await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+            await send_dirlink_message2(
+                start, cmd, res, link_type, uname, uid, message, url, client
+            )
     elif "androidatahost." in url:
         link_type = "AndroidataHost"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.androiddatahost(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "krakenfiles." in url:
         link_type = "KrakenFiles"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.krakenfiles(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "dropbox." in url:
         link_type = "DropBox"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         if "dropbox.com/s/" in url:
             res = await direct_link.dropbox(url)
             sleep(1)
-            await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+            await send_dirlink_message2(
+                start, cmd, res, link_type, uname, uid, message, url, client
+            )
         else:
             res = await direct_link.dropbox2(url)
             sleep(1)
-            await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+            await send_dirlink_message2(
+                start, cmd, res, link_type, uname, uid, message, url, client
+            )
     elif "pixeldrain." in url:
         link_type = "PixelDrain"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.pixeldrain(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif ("streamlare." or "sltube.") in url:
         link_type = "Streamlare"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.streamlare(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "pandafiles." in url:
         link_type = "PandaFiles"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.pandafile(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif is_fichier:
         link_type = "Fichier"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.fichier(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "upload.ee" in url:
         link_type = "UploadEE"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.uploadee(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "uptobox." in url:
         link_type = "Uptobox"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.uptobox(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "solidfiles." in url:
         link_type = "SolidFiles"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.solidfiles(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "hubcloud." in url:
         link_type = "HubCloud"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.hubcloud(url)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "bunkr.is" in url:
         link_type = "Bunkr.is"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.bunkr_cyber(url)
         res = await telegraph_paste(res)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "cyberdrop." in url:
         link_type = "CyberDrop"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.bunkr_cyber(url)
         res = await telegraph_paste(res)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "pixl.is" in url:
         link_type = "Pixl.is"
         await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
         res = await direct_link.pixl(url)
         res = await telegraph_paste(res)
         sleep(1)
-        await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+        await send_dirlink_message2(
+            start, cmd, res, link_type, uname, uid, message, url, client
+        )
     elif "send.cm" in url:
         is_sendcm_folder = is_sendcm_folder_link(url)
         if is_sendcm_folder:
@@ -395,31 +477,43 @@ async def direct(client, message: Message):
             res = await direct_link.sendcm(url)
             res = await telegraph_paste(res)
             sleep(1)
-            await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+            await send_dirlink_message2(
+                start, cmd, res, link_type, uname, uid, message, url, client
+            )
         else:
             link_type = "Sendcm File"
             await send_dirlink_message(cmd, link_type, url, uname, uid, msg)
             res = await direct_link.sendcm(url)
             sleep(1)
-            await send_dirlink_message2(start, cmd, res, link_type, uname, uid, message, url, client)
+            await send_dirlink_message2(
+                start, cmd, res, link_type, uname, uid, message, url, client
+            )
     elif any(x in url for x in linkvertise_list):
-        err3 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link " \
-               f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        err3 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link "
+            f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        )
         await msg.edit(text=err3)
         return
     elif any(x in url for x in bypass_list):
-        err4 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link " \
-               f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        err4 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link "
+            f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        )
         await msg.edit(text=err4)
         return
     elif any(x in url for x in adfly_list):
-        err5 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link " \
-               f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        err5 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Short Link "
+            f"Bypasser</b>\n\n<i>Use it with /bypass command followed by Link</i> "
+        )
         await msg.edit(text=err5)
         return
     elif any(x in url for x in scrape_list):
-        err6 = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Site Scraper</b>\n\n<i>Use it " \
-               f"with /scrape command followed by Link</i> "
+        err6 = (
+            f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>This Link is Supported by the Site Scraper</b>\n\n<i>Use it "
+            f"with /scrape command followed by Link</i> "
+        )
         await msg.edit(text=err6)
         return
     else:

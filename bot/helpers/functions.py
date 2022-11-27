@@ -40,7 +40,8 @@ async def forcesub(client, message: Message) -> bool:
     if (
         FORCESUB_ENABLE
         and (FORCESUB_CHANNEL and FORCESUB_CHANNEL_UNAME and BOTOWNER_UNAME) is not None
-        and message.chat.type not in [ChatType.SUPERGROUP, ChatType.CHANNEL, ChatType.GROUP, ChatType.BOT]
+        and message.chat.type
+        not in [ChatType.SUPERGROUP, ChatType.CHANNEL, ChatType.GROUP, ChatType.BOT]
     ):
         try:
             user = await client.get_chat_member(FORCESUB_CHANNEL, message.chat.id)
