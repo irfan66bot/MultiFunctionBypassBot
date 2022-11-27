@@ -4,8 +4,8 @@ import requests
 from bot.helpers.functions import api_checker
 
 
-def bitly(url):
-    dom = api_checker()
+async def bitly(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -22,8 +22,8 @@ def bitly(url):
         return res["msg"]
 
 
-def dagd(url):
-    dom = api_checker()
+async def dagd(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -40,8 +40,8 @@ def dagd(url):
         return res["msg"]
 
 
-def tinyurl(url):
-    dom = api_checker()
+async def tinyurl(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -58,8 +58,8 @@ def tinyurl(url):
         return res["msg"]
 
 
-def osdb(url):
-    dom = api_checker()
+async def osdb(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -76,8 +76,8 @@ def osdb(url):
         return res["msg"]
 
 
-def ttm(url):
-    dom = api_checker()
+async def ttm(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -94,8 +94,8 @@ def ttm(url):
         return res["msg"]
 
 
-def isgd(url):
-    dom = api_checker()
+async def isgd(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -112,8 +112,8 @@ def isgd(url):
         return res["msg"]
 
 
-def vgd(url):
-    dom = api_checker()
+async def vgd(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -130,8 +130,8 @@ def vgd(url):
         return res["msg"]
 
 
-def clickru(url):
-    dom = api_checker()
+async def clickru(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -148,8 +148,8 @@ def clickru(url):
         return res["msg"]
 
 
-def clilp(url):
-    dom = api_checker()
+async def clilp(url):
+    dom = await api_checker()
     api = f"{dom}/shorten"
     resp = requests.get(url)
     if resp.status_code == 404:

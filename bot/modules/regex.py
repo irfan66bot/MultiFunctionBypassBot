@@ -1,5 +1,8 @@
 import re
 
+import requests
+from bs4 import BeautifulSoup
+
 URL_REGEX = r"(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+"
 
 
@@ -9,6 +12,16 @@ def is_a_url(url: str):
         url,
     )
     return bool(url)
+
+
+def is_bhadoo_index(url: str):
+    client = requests.Session()
+    url = url + "/" if url[-1] != "/" else url
+    res = client.get(url, allow_redirects=False)
+    soup = BeautifulSoup(res.content, "html.parser")
+    x = soup.select('link[href^="https://cdn.jsdelivr.net/npm/@googledrive/index"]')
+    if x:
+        return bool(url)
 
 
 def is_gdtot_link(url: str):
@@ -55,9 +68,5 @@ def is_fichier_link(url: str):
 
 
 def is_sendcm_folder_link(url: str):
-    return (
-        "https://send.cm/s/" in url
-        or "https://send.cm/?sort" in url
-        or "https://send.cm/?sort_field" in url
-        or "https://send.cm/?sort_order" in url
-    )
+    return ("https://send.cm/s/" or "https://send.cm/?sort" or "https://send.cm/?sort_field" or "https://send.cm/?sort_order") in url
+

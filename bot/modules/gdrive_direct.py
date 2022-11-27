@@ -5,7 +5,6 @@ from time import sleep
 from urllib.parse import parse_qs, urlparse
 
 import chromedriver_autoinstaller
-import requests
 from lxml import etree
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -16,7 +15,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from bot.config import *
 
 
-def gdtot(url: str) -> str:
+async def gdtot(url: str) -> str:
     if GDTOT_CRYPT is None:
         return "GdTot Crypt not provided!"
     crypt = GDTOT_CRYPT
@@ -26,26 +25,19 @@ def gdtot(url: str) -> str:
     res = client.get(url)
     res = client.get(f"https://{match[0]}.gdtot.{match[1]}/dld?id={url.split('/')[-1]}")
     url = re.findall(r'URL=(.*?)"', res.text)[0]
-    info = {}
-    info["error"] = False
     params = parse_qs(urlparse(url).query)
     if "gd" not in params or not params["gd"] or params["gd"][0] == "false":
-        info["error"] = True
-        if "msgx" in params:
-            info["message"] = params["msgx"][0]
-        else:
-            info["message"] = "Invalid link"
+        return "Something went wrong. Could not generate GDrive URL for your GDTot Link"
     else:
-        decoded_id = base64.b64decode(str(params["gd"][0])).decode("utf-8")
-        drive_link = f"https://drive.google.com/open?id={decoded_id}"
-        info["gdrive_link"] = drive_link
-    if not info["error"]:
-        return info["gdrive_link"]
-    else:
-        return f"{info['message']}"
+        try:
+            decoded_id = base64.b64decode(str(params["gd"][0])).decode("utf-8")
+        except:
+            return "Something went wrong. Could not generate GDrive URL for your GDTot Link"
+    drive_link = f"https://drive.google.com/open?id={decoded_id}"
+    return drive_link
 
 
-def unified(url: str) -> str:
+async def unified(url: str) -> str:
     global response
     if (UNIFIED_EMAIL or UNIFIED_PASS) is None:
         return "AppDrive Look-Alike Credentials not Found!"
@@ -105,15 +97,15 @@ def unified(url: str) -> str:
             flink = info_parsed["gdrive_link"]
             return flink
         elif urlparse(url).netloc in (
-            "driveapp.in",
-            "drivehub.in",
-            "gdflix.pro",
-            "gdflix.top",
-            "drivesharer.in",
-            "drivebit.in",
-            "drivelinks.in",
-            "driveace.in",
-            "drivepro.in",
+                "driveapp.in",
+                "drivehub.in",
+                "gdflix.pro",
+                "gdflix.top",
+                "drivesharer.in",
+                "drivebit.in",
+                "drivelinks.in",
+                "driveace.in",
+                "drivepro.in",
         ):
             res = client.get(info_parsed["gdrive_link"])
             drive_link = etree.HTML(res.content).xpath(
@@ -132,7 +124,7 @@ def unified(url: str) -> str:
         return f"Encountered Error while parsing Link : {err}"
 
 
-def udrive(url: str) -> str:
+async def udrive(url: str) -> str:
     client = requests.Session()
     if "hubdrive." in url:
         url = url.replace(".me", ".pw")
@@ -168,7 +160,7 @@ def udrive(url: str) -> str:
             return "JioDrive Crypt not provided!"
         client.cookies.update({"crypt": JIODRIVE_CRYPT})
     res = client.get(url)
-    info_parsed = parse_info(res, url)
+    info_parsed = await parse_info(res, url)
     info_parsed["error"] = False
     up = urlparse(url)
     req_url = f"{up.scheme}://{up.netloc}/ajax.php?ajax=download"
@@ -200,7 +192,7 @@ def udrive(url: str) -> str:
         return flink
 
 
-def parse_info(res, url):
+async def parse_info(res, url):
     info_parsed = {}
     if "drivebuzz." in url:
         info_chunks = re.findall('<td\salign="right">(.*?)<\/td>', res.text)
@@ -217,7 +209,7 @@ def parse_info(res, url):
     return info_parsed
 
 
-def sharerpw(url: str, forced_login=False) -> str:
+async def sharerpw(url: str, forced_login=False) -> str:
     if (Sharerpw_XSRF or Sharerpw_laravel) is None:
         return "Sharerpw Cookies not Found!"
     try:
@@ -231,7 +223,7 @@ def sharerpw(url: str, forced_login=False) -> str:
         res = scraper.get(url)
         token = re.findall("_token\s=\s'(.*?)'", res.text, re.DOTALL)[0]
         ddl_btn = etree.HTML(res.content).xpath("//button[@id='btndirect']")
-        info_parsed = parse_info(res, url)
+        info_parsed = await parse_info(res, url)
         info_parsed["error"] = True
         info_parsed["src_url"] = url
         info_parsed["link_type"] = "login"
@@ -259,7 +251,7 @@ def sharerpw(url: str, forced_login=False) -> str:
         return f"Encountered Error while parsing Link : {err}"
 
 
-def drivehubs(url: str) -> str:
+async def drivehubs(url: str) -> str:
     chromedriver_autoinstaller.install()
 
     os.chmod("/usr/src/app/chromedriver", 755)
@@ -280,7 +272,7 @@ def drivehubs(url: str) -> str:
         return f"ERROR! Maybe Direct Download is not working for this file !\n Retrived URL : {flink}"
 
 
-def pahe(url: str) -> str:
+async def pahe(url: str) -> str:
     chromedriver_autoinstaller.install()
 
     AGREE_BUTTON = "//*[contains(text(), 'AGREE')]"

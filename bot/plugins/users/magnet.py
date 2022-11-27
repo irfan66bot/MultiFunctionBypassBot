@@ -29,8 +29,7 @@ async def magnet(client, message: Message):
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
-    cmd = ""
-    url = ""
+    global url, cmd
     if len(msg_args) > 1:
         if len(message.command) != 2:
             await message.reply_text("Sorry, Could not understand your Input!")
@@ -82,13 +81,13 @@ async def magnet(client, message: Message):
     LOGGER(__name__).info(f" Received : {cmd} - {url}")
     abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Magnet Scraping</i>"
     await message.reply_text(text=abc, disable_web_page_preview=True, quote=True)
-    res = scraper.magnet_scrap(url)
+    res = await scraper.magnet_scrap(url)
     time_taken = get_readable_time(time() - start)
     LOGGER(__name__).info(f" Destination : {cmd} - {res}")
     xyz = f"<b>Bypassed Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
     await message.reply_text(text=xyz, disable_web_page_preview=True, quote=True)
     try:
-        msg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Destination URL:</i> {res}\n\n<b><i>Time Taken:</i></b> {time_taken}"
+        msg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Command:</i> {cmd}\n<i>Destination URL:</i> {res}\n\n<b><i>Time Taken:</i></b> {time_taken}"
         await client.send_message(
             chat_id=LOG_CHANNEL,
             text=msg,

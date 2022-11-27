@@ -40,7 +40,7 @@ async def forcesub(client, message: Message) -> bool:
     if (
         FORCESUB_ENABLE
         and (FORCESUB_CHANNEL and FORCESUB_CHANNEL_UNAME and BOTOWNER_UNAME) is not None
-        and message.chat.type in ChatType.PRIVATE
+        and message.chat.type not in [ChatType.SUPERGROUP, ChatType.CHANNEL, ChatType.GROUP, ChatType.BOT]
     ):
         try:
             user = await client.get_chat_member(FORCESUB_CHANNEL, message.chat.id)
@@ -139,7 +139,7 @@ def get_readable_size(size):
     return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
 
-def multi_api():
+async def multi_api():
     EMILY_API_LIST = []
     emilyapi_urls = EMILY_API_URL.split(" ")
     for api in emilyapi_urls:
@@ -147,11 +147,11 @@ def multi_api():
     return random.choice(EMILY_API_LIST)
 
 
-def api_checker():
-    api_url = multi_api()
+async def api_checker():
+    api_url = await multi_api()
     r = requests.get(api_url)
     if r.status_code == 200:
         LOGGER(__name__).info(f" Using API : {api_url}")
         return api_url
     else:
-        api_checker()
+        await api_checker()

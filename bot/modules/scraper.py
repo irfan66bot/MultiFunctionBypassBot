@@ -47,7 +47,7 @@ def index_scraper(payload, url):
         return res
 
 
-def index_scrap(url):
+async def index_scrap(url):
     x = 0
     payload = {"page_token": next_page_token, "page_index": x}
     msg = f"Index Link: {url}\n\n"
@@ -60,8 +60,8 @@ def index_scrap(url):
     return msg
 
 
-def atishmkv_scrap(url):
-    dom = api_checker()
+async def atishmkv_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -75,8 +75,8 @@ def atishmkv_scrap(url):
         return res["msg"]
 
 
-def cinevez_scrap(url):
-    dom = api_checker()
+async def cinevez_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -90,8 +90,8 @@ def cinevez_scrap(url):
         return res["msg"]
 
 
-def cinevood_scrap(url):
-    dom = api_checker()
+async def cinevood_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -105,8 +105,8 @@ def cinevood_scrap(url):
         return res["msg"]
 
 
-def filecrypt_scrap(url):
-    dom = api_checker()
+async def filecrypt_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -120,8 +120,8 @@ def filecrypt_scrap(url):
         return res["msg"]
 
 
-def htpmovies_scrap(url):
-    dom = api_checker()
+async def htpmovies_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -135,8 +135,8 @@ def htpmovies_scrap(url):
         return res["msg"]
 
 
-def igggames_scrape(url):
-    dom = api_checker()
+async def igggames_scrape(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -150,8 +150,8 @@ def igggames_scrape(url):
         return res["msg"]
 
 
-def moviesdrama_scrap(url):
-    dom = api_checker()
+async def moviesdrama_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -165,8 +165,8 @@ def moviesdrama_scrap(url):
         return res["msg"]
 
 
-def privatemoviez_scrape(url):
-    dom = api_checker()
+async def privatemoviez_scrape(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -180,8 +180,8 @@ def privatemoviez_scrape(url):
         return res["msg"]
 
 
-def magnet_scrap(url):
-    dom = api_checker()
+async def magnet_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -195,8 +195,8 @@ def magnet_scrap(url):
         return res["msg"]
 
 
-def sharespark_scrap(url):
-    dom = api_checker()
+async def sharespark_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -210,8 +210,8 @@ def sharespark_scrap(url):
         return res["msg"]
 
 
-def olamovies_scrap(url):
-    dom = api_checker()
+async def olamovies_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -225,8 +225,8 @@ def olamovies_scrap(url):
         return res["msg"]
 
 
-def psa_scrap(url):
-    dom = api_checker()
+async def psa_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -240,8 +240,8 @@ def psa_scrap(url):
         return res["msg"]
 
 
-def taemovies_scrap(url):
-    dom = api_checker()
+async def taemovies_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -255,8 +255,8 @@ def taemovies_scrap(url):
         return res["msg"]
 
 
-def teleguflix_scrap(url):
-    dom = api_checker()
+async def teleguflix_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:
@@ -270,8 +270,8 @@ def teleguflix_scrap(url):
         return res["msg"]
 
 
-def toonworld4all_scrap(url):
-    dom = api_checker()
+async def toonworld4all_scrap(url):
+    dom = await api_checker()
     api = f"{dom}/scraper"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:

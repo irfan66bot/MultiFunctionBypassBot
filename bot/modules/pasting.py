@@ -3,8 +3,8 @@ import cloudscraper
 from bot.helpers.functions import api_checker
 
 
-def telegraph_paste(res):
-    dom = api_checker()
+async def telegraph_paste(res):
+    dom = await api_checker()
     api = f"{dom}/paste"
     client = cloudscraper.create_scraper(allow_brotli=False)
     try:

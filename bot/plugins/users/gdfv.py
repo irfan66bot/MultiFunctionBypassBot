@@ -16,6 +16,28 @@ prefixes = COMMAND_PREFIXES
 commands = ["gd", f"gd@{BOT_USERNAME}"]
 
 
+async def send_gdrive_message(uname, uid, url, link_type, msg):
+    a = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>{link_type}</i>"
+    await msg.edit(text=a)
+
+
+async def send_gdrive_message2(start, cmd, res, message, uid, url, client):
+    time_taken = get_readable_time(time() - start)
+    LOGGER(__name__).info(f" Destination : {cmd} - {res}")
+    b = f"<b>Direct Gdrive Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
+    await message.reply_text(text=b, disable_web_page_preview=True, quote=True)
+    try:
+        logmsg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Command:</i> {cmd}\n<i>Destination URL:</i> {res}\n\n<b><i>Time Taken:</i></b> {time_taken}"
+        await client.send_message(
+            chat_id=LOG_CHANNEL,
+            text=logmsg,
+            parse_mode=enums.ParseMode.HTML,
+            disable_web_page_preview=True,
+        )
+    except Exception as err:
+        LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
+
+
 @Client.on_message(filters.command(commands, **prefixes))
 @user_commands
 async def gd(client, message: Message):
@@ -29,8 +51,7 @@ async def gd(client, message: Message):
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
-    cmd = ""
-    url = ""
+    global url, cmd
     if len(msg_args) > 1:
         if len(message.command) != 2:
             await message.reply_text("Sorry, Could not understand your Input!")
@@ -66,10 +87,10 @@ async def gd(client, message: Message):
         await DatabaseHelper().add_user(user_id)
         try:
             join_dt = await DatabaseHelper().get_bot_started_on(user_id)
-            msg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
+            startmsg = f"<i>A New User has started the Bot: {message.from_user.mention}.</i>\n\n<b>Join Time</b>: {join_dt}"
             await client.send_message(
                 chat_id=LOG_CHANNEL,
-                text=msg,
+                text=startmsg,
                 parse_mode=enums.ParseMode.HTML,
                 disable_web_page_preview=True,
             )
@@ -91,62 +112,48 @@ async def gd(client, message: Message):
     is_udrive = is_udrive_link(url)
     is_sharer = is_sharer_link(url)
     if is_gdtot:
-        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>GDTot</i>"
-        await msg.edit(text=abc)
-        res = gdtot(url)
-        time_taken = get_readable_time(time() - start)
-        LOGGER(__name__).info(f" Destination : {cmd} - {res}")
-        xyz = f"<b>Direct Gdrive Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
+        link_type = "GDTot"
+        await send_gdrive_message(uname, uid, url, link_type, msg)
+        res = await gdtot(url)
+        sleep(1)
+        await send_gdrive_message2(start, cmd, res, message, uid, url, client)
     elif is_drivehubs:
-        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>DriveHubs</i>"
-        await msg.edit(text=abc)
-        res = drivehubs(url)
-        time_taken = get_readable_time(time() - start)
-        LOGGER(__name__).info(f" Destination : {cmd} - {res}")
-        xyz = f"<b>Direct Gdrive Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
+        link_type = "DriveHubs"
+        await send_gdrive_message(uname, uid, url, link_type, msg)
+        res = await drivehubs(url)
+        sleep(1)
+        await send_gdrive_message2(start, cmd, res, message, uid, url, client)
     elif is_unified:
-        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>AppDrive Look-Alike</i>"
-        await msg.edit(text=abc)
-        res = unified(url)
-        time_taken = get_readable_time(time() - start)
-        LOGGER(__name__).info(f" Destination : {cmd} - {res}")
-        xyz = f"<b>Direct Gdrive Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
+        link_type = "AppDrive LookAlike"
+        await send_gdrive_message(uname, uid, url, link_type, msg)
+        res = await unified(url)
+        sleep(1)
+        await send_gdrive_message2(start, cmd, res, message, uid, url, client)
     elif is_udrive:
-        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>HubDrive Look-Alike</i>"
-        await msg.edit(text=abc)
-        res = udrive(url)
-        time_taken = get_readable_time(time() - start)
-        LOGGER(__name__).info(f" Destination : {cmd} - {res}")
-        xyz = f"<b>Direct Gdrive Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
+        link_type = "HubDrive LookAlike"
+        await send_gdrive_message(uname, uid, url, link_type, msg)
+        res = await udrive(url)
+        sleep(1)
+        await send_gdrive_message2(start, cmd, res, message, uid, url, client)
     elif is_sharer:
-        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Sharer.pw</i>"
-        await msg.edit(text=abc)
-        res = sharerpw(url)
-        time_taken = get_readable_time(time() - start)
-        LOGGER(__name__).info(f" Destination : {cmd} - {res}")
-        xyz = f"<b>Direct Gdrive Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
+        link_type = "Sharerpw"
+        await send_gdrive_message(uname, uid, url, link_type, msg)
+        res = await sharerpw(url)
+        sleep(1)
+        await send_gdrive_message2(start, cmd, res, message, uid, url, client)
     elif "pahe." in url:
-        abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>\n\n<b>Link Type</b> : <i>Pahe</i>"
-        await msg.edit(text=abc)
-        res = pahe(url)
-        time_taken = get_readable_time(time() - start)
-        LOGGER(__name__).info(f" Destination : {cmd} - {res}")
-        xyz = f"<b>Direct Gdrive Link :\n</b>{res}\n\n<i>Time Taken : {time_taken}</i>"
+        link_type = "Pahe"
+        await send_gdrive_message(uname, uid, url, link_type, msg)
+        res = await pahe(url)
+        sleep(1)
+        await send_gdrive_message2(start, cmd, res, message, uid, url, client)
     elif "drive.google.com" in url:
         await msg.delete()
-        xyz = "You have entered a Google Drive Link!"
+        err = "You have entered a Google Drive Link!"
+        await message.reply_text(text=err, disable_web_page_preview=True, quote=True)
+        return
     else:
         await msg.delete()
-        xyz = "This Command does not support this Link!"
-    sleep(1)
-    await message.reply_text(text=xyz, disable_web_page_preview=True, quote=True)
-    try:
-        msg = f"<b><i>User:</i></b> {uid}\n<i>User URL:</i> {url}\n<i>Destination URL:</i> {res}\n\n<b><i>Time Taken:</i></b> {time_taken}"
-        await client.send_message(
-            chat_id=LOG_CHANNEL,
-            text=msg,
-            parse_mode=enums.ParseMode.HTML,
-            disable_web_page_preview=True,
-        )
-    except Exception as err:
-        LOGGER(__name__).error(f"BOT Log Channel Error: {err}")
+        err = "This Command does not support this Link!"
+        await message.reply_text(text=err, disable_web_page_preview=True, quote=True)
+        return

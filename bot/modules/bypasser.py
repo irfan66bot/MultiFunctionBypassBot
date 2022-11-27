@@ -10,8 +10,8 @@ from bot.config import *
 from bot.helpers.functions import api_checker
 
 
-def adfly(url):
-    dom = api_checker()
+async def adfly(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -28,8 +28,8 @@ def adfly(url):
         return res["msg"]
 
 
-def adrinolinks(url):
-    dom = api_checker()
+async def adrinolinks(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -46,7 +46,7 @@ def adrinolinks(url):
         return res["msg"]
 
 
-def bifm(url):
+async def bifm(url):
     client = cloudscraper.create_scraper(allow_brotli=False)
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36"
@@ -64,8 +64,8 @@ def bifm(url):
         return query["error"]
 
 
-def droplink(url):
-    dom = api_checker()
+async def droplink(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -82,8 +82,8 @@ def droplink(url):
         return res["msg"]
 
 
-def dulink(url):
-    dom = api_checker()
+async def dulink(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -100,8 +100,8 @@ def dulink(url):
         return res["msg"]
 
 
-def ez4short(url):
-    dom = api_checker()
+async def ez4short(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -118,8 +118,8 @@ def ez4short(url):
         return res["msg"]
 
 
-def gplinks(url):
-    dom = api_checker()
+async def gplinks(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -136,8 +136,8 @@ def gplinks(url):
         return res["msg"]
 
 
-def gtlinks(url):
-    dom = api_checker()
+async def gtlinks(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -154,8 +154,8 @@ def gtlinks(url):
         return res["msg"]
 
 
-def gyanilinks(url):
-    dom = api_checker()
+async def gyanilinks(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -172,8 +172,8 @@ def gyanilinks(url):
         return res["msg"]
 
 
-def htpmovies(url):
-    dom = api_checker()
+async def htpmovies(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -190,8 +190,8 @@ def htpmovies(url):
         return res["msg"]
 
 
-def hypershort(url):
-    dom = api_checker()
+async def hypershort(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -208,8 +208,8 @@ def hypershort(url):
         return res["msg"]
 
 
-def krownlinks(url):
-    dom = api_checker()
+async def krownlinks(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -226,8 +226,8 @@ def krownlinks(url):
         return res["msg"]
 
 
-def linkvertise(url):
-    dom = api_checker()
+async def linkvertise(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -244,7 +244,7 @@ def linkvertise(url):
         return res["msg"]
 
 
-def multi_aio(url):
+async def multi_aio(url):
     resp = requests.get(url)
     if resp.status_code == 404:
         return "File not found/The link you entered is wrong!"
@@ -257,7 +257,7 @@ def multi_aio(url):
         return r.json()["response"]
 
 
-def multi_bypass(url):
+async def multi_bypass(url):
     resp = requests.get(url)
     if resp.status_code == 404:
         return "File not found/The link you entered is wrong!"
@@ -265,7 +265,7 @@ def multi_bypass(url):
     try:
         f_msg = pybyp(url)
     except Exception:
-        dom = api_checker()
+        dom = await api_checker()
         api = f"{dom}/multi"
         try:
             resp = client.post(api, json={"url": url})
@@ -279,8 +279,8 @@ def multi_bypass(url):
     return f_msg
 
 
-def ouo(url):
-    dom = api_checker()
+async def ouo(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -297,8 +297,8 @@ def ouo(url):
         return res["msg"]
 
 
-def privatemoviez(url):
-    dom = api_checker()
+async def privatemoviez(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -318,7 +318,7 @@ def privatemoviez(url):
 ANCHOR_URL = "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6Lcr1ncUAAAAAH3cghg6cOTPGARa8adOf-y9zv2x&co=aHR0cHM6Ly9vdW8uaW86NDQz&hl=en&v=1B_yv3CBEV10KtI2HJ6eEXhJ&size=invisible&cb=4xnsug1vufyr"
 
 
-def RecaptchaV3(ANCHOR_URL):
+async def RecaptchaV3(ANCHOR_URL):
     url_base = "https://www.google.com/recaptcha/"
     post_data = "v={}&reason=q&c={}&k={}&co={}"
     client = cloudscraper.create_scraper(allow_brotli=False)
@@ -334,8 +334,8 @@ def RecaptchaV3(ANCHOR_URL):
     return re.findall(r'"rresp","(.*?)"', res.text)[0]
 
 
-def rocklinks(url):
-    dom = api_checker()
+async def rocklinks(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -352,7 +352,7 @@ def rocklinks(url):
         return res["msg"]
 
 
-def script(url):
+async def script(url):
     try:
         scriptb(url)
     except BaseException:
@@ -360,7 +360,7 @@ def script(url):
         scripta(f"https://{url.split('/')[-2]}/", url, client)
 
 
-def scripta(domain, url, client):
+async def scripta(domain, url, client):
     res = client.get(url)
     soup = BeautifulSoup(res.text, "html.parser")
     soup = soup.find("form").findAll("input")
@@ -393,7 +393,7 @@ def scripta(domain, url, client):
     return furl
 
 
-def scriptb(url):
+async def scriptb(url):
     client = requests.session()
     res = client.get(url)
     soup = BeautifulSoup(res.text, "html.parser")
@@ -430,8 +430,8 @@ def scriptb(url):
     return scripta(f"https://{furl.split('/')[-2]}/", furl, client)
 
 
-def shareus(url):
-    dom = api_checker()
+async def shareus(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -448,8 +448,8 @@ def shareus(url):
         return res["msg"]
 
 
-def short2url(url):
-    dom = api_checker()
+async def short2url(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -466,8 +466,8 @@ def short2url(url):
         return res["msg"]
 
 
-def shorte(url):
-    dom = api_checker()
+async def shorte(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -484,8 +484,8 @@ def shorte(url):
         return res["msg"]
 
 
-def shortingly(url):
-    dom = api_checker()
+async def shortingly(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -502,8 +502,8 @@ def shortingly(url):
         return res["msg"]
 
 
-def sirigan(url):
-    dom = api_checker()
+async def sirigan(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -520,8 +520,8 @@ def sirigan(url):
         return res["msg"]
 
 
-def tnlink(url):
-    dom = api_checker()
+async def tnlink(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -538,8 +538,8 @@ def tnlink(url):
         return res["msg"]
 
 
-def xpshort(url):
-    dom = api_checker()
+async def xpshort(url):
+    dom = await api_checker()
     api = f"{dom}/bypass"
     resp = requests.get(url)
     if resp.status_code == 404:

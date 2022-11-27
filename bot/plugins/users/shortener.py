@@ -29,8 +29,7 @@ async def shorten(client, message: Message):
     msg_arg = message.text.replace("  ", " ")
     msg_args = msg_arg.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
-    cmd = ""
-    url = ""
+    global url, cmd
     if len(msg_args) > 1:
         if len(message.command) != 2:
             await message.reply_text("Sorry, Could not understand your Input!")
@@ -81,15 +80,15 @@ async def shorten(client, message: Message):
     LOGGER(__name__).info(f" Received : {cmd} - {url}")
     abc = f"<b>Dear</b> {uname} (ID: {uid}),\n\n<b>Bot has received the following link</b>‌ :\n<code>{url}</code>"
     await message.reply_text(text=abc, disable_web_page_preview=True, quote=True)
-    res1 = shortener.bitly(url)
-    res2 = shortener.dagd(url)
-    res3 = shortener.tinyurl(url)
-    res4 = shortener.osdb(url)
-    res5 = shortener.ttm(url)
-    res6 = shortener.isgd(url)
-    res7 = shortener.vgd(url)
-    res8 = shortener.clickru(url)
-    res9 = shortener.clilp(url)
+    res1 = await shortener.bitly(url)
+    res2 = await shortener.dagd(url)
+    res3 = await shortener.tinyurl(url)
+    res4 = await shortener.osdb(url)
+    res5 = await shortener.ttm(url)
+    res6 = await shortener.isgd(url)
+    res7 = await shortener.vgd(url)
+    res8 = await shortener.clickru(url)
+    res9 = await shortener.clilp(url)
     time_taken = get_readable_time(time() - start)
     LOGGER(__name__).info(
         f" Destination : {res1} | {res2} | {res3} | {res4} | {res5} | {res6} | {res7} | {res8} | {res9}"

@@ -8,8 +8,8 @@ https://github.com/UsergeTeam/Userge/blob/alpha/userge/versions.py
 """
 
 __major__ = 3
-__minor__ = 0
-__micro__ = 0
+__minor__ = 2
+__micro__ = 5
 
 
 def get_version() -> str:

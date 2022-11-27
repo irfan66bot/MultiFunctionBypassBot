@@ -18,8 +18,8 @@ from bot.helpers.functions import api_checker
 from bot.modules.regex import is_sendcm_folder_link
 
 
-def androiddatahost(url):
-    dom = api_checker()
+async def androiddatahost(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -36,22 +36,22 @@ def androiddatahost(url):
         return res["msg"]
 
 
-def anonfiles(url):
+async def anonfiles(url):
     try:
         return Bypass().bypass_anonfiles(url)
     except BaseException:
         return "Could not Generate Direct Link for your AnonFiles Link :("
 
 
-def antfiles(url):
+async def antfiles(url):
     try:
         return Bypass().bypass_antfiles(url)
     except BaseException:
         return "Could not Generate Direct Link for your AntFiles Link :("
 
 
-def artstation(url):
-    dom = api_checker()
+async def artstation(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -68,7 +68,7 @@ def artstation(url):
         return res["msg"]
 
 
-def bunkr_cyber(url):
+async def bunkr_cyber(url):
     count = 1
     dl_msg = ""
     resp = requests.get(url)
@@ -102,15 +102,15 @@ def bunkr_cyber(url):
         return f"Could not Generate Direct Link for your {link_type} Link :("
 
 
-def dropbox(url):
+async def dropbox(url):
     return url.replace("dropbox.com", "dl.dropboxusercontent.com")
 
 
-def dropbox2(url):
+async def dropbox2(url):
     return url.replace("?dl=0", "?dl=1")
 
 
-def fembed(url):
+async def fembed(url):
     try:
         dl_url = Bypass().bypass_fembed(url)
         count = len(dl_url)
@@ -121,7 +121,7 @@ def fembed(url):
         return "Could not Generate Direct Link for your FEmbed Link :("
 
 
-def fichier(url):
+async def fichier(url):
     regex = r"^([http:\/\/|https:\/\/]+)?.*1fichier\.com\/\?.+"
     gan = re.match(regex, url)
     if not gan:
@@ -166,15 +166,15 @@ def fichier(url):
         return "Error trying to generate Direct Link from 1fichier!"
 
 
-def filesIm(url):
+async def filesIm(url):
     try:
         return Bypass().bypass_filesIm(url)
     except BaseException:
         return "Could not Generate Direct Link for your FilesIm Link :("
 
 
-def github(url):
-    dom = api_checker()
+async def github(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -191,8 +191,8 @@ def github(url):
         return res["msg"]
 
 
-def gdbot(url):
-    dom = api_checker()
+async def gdbot(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -209,8 +209,8 @@ def gdbot(url):
         return res["msg"]
 
 
-def gofile(url):
-    dom = api_checker()
+async def gofile(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -227,7 +227,7 @@ def gofile(url):
         return res["msg"]
 
 
-def hubcloud(url):
+async def hubcloud(url):
     chromedriver_autoinstaller.install()
 
     # Specifying Buttons
@@ -293,15 +293,15 @@ def hubcloud(url):
     return final_msg
 
 
-def hxfile(url):
+async def hxfile(url):
     try:
         return Bypass().bypass_filesIm(url)
     except BaseException:
         return "Could not Generate Direct Link for your HXFile Link :("
 
 
-def krakenfiles(url):
-    dom = api_checker()
+async def krakenfiles(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -318,22 +318,22 @@ def krakenfiles(url):
         return res["msg"]
 
 
-def letsupload(url):
+async def letsupload(url):
     try:
         return Bypass().bypass_url(url)
     except BaseException:
         return "Could not Generate Direct Link for your LetsUpload Link :("
 
 
-def linkpoi(url):
+async def linkpoi(url):
     try:
         return Bypass().bypass_linkpoi(url)
     except BaseException:
         return "Could not Generate Direct Link for your Linkpoi Link :("
 
 
-def mdisk(url):
-    dom = api_checker()
+async def mdisk(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -350,8 +350,8 @@ def mdisk(url):
         return res["msg"]
 
 
-def mdisk_mpd(url):
-    dom = api_checker()
+async def mdisk_mpd(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -368,8 +368,8 @@ def mdisk_mpd(url):
         return res["msg"]
 
 
-def mediafire(url):
-    dom = api_checker()
+async def mediafire(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -386,8 +386,8 @@ def mediafire(url):
         return res["msg"]
 
 
-def megaup(url):
-    dom = api_checker()
+async def megaup(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -404,15 +404,15 @@ def megaup(url):
         return res["msg"]
 
 
-def mirrored(url):
+async def mirrored(url):
     try:
         return Bypass().bypass_mirrored(url)
     except BaseException:
         return "Could not Generate Direct Link for your Mirrored Link :("
 
 
-def osdn(url):
-    dom = api_checker()
+async def osdn(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -429,8 +429,8 @@ def osdn(url):
         return res["msg"]
 
 
-def pandafile(url):
-    dom = api_checker()
+async def pandafile(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -447,8 +447,8 @@ def pandafile(url):
         return res["msg"]
 
 
-def pixeldrain(url):
-    dom = api_checker()
+async def pixeldrain(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -465,7 +465,7 @@ def pixeldrain(url):
         return res["msg"]
 
 
-def pixl(url):
+async def pixl(url):
     resp = requests.get(url)
     if resp.status_code == 404:
         return "File not found/The link you entered is wrong!"
@@ -503,14 +503,14 @@ def pixl(url):
         return "Could not Generate Direct Link for your Pixl.is Link :("
 
 
-def reupload(url):
+async def reupload(url):
     try:
         return Bypass().bypass_reupload(url)
     except BaseException:
         return "Could not Generate Direct Link for your ReUpload Link :("
 
 
-def sbembed(url):
+async def sbembed(url):
     try:
         dl_url = Bypass().bypass_sbembed(url)
         count = len(dl_url)
@@ -521,7 +521,7 @@ def sbembed(url):
         return "Could not Generate Direct Link for your SBEmbed Link :("
 
 
-def sendcm(url):
+async def sendcm(url):
     res = requests.get(url)
     if res.status_code == 404:
         return "File not found/The link you entered is wrong!"
@@ -584,8 +584,8 @@ def sendcm(url):
         )
 
 
-def solidfiles(url):
-    dom = api_checker()
+async def solidfiles(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -602,8 +602,8 @@ def solidfiles(url):
         return res["msg"]
 
 
-def sfile(url):
-    dom = api_checker()
+async def sfile(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -620,8 +620,8 @@ def sfile(url):
         return res["msg"]
 
 
-def sourceforge(url):
-    dom = api_checker()
+async def sourceforge(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -638,12 +638,12 @@ def sourceforge(url):
         return res["msg"]
 
 
-def sourceforge2(url):
+async def sourceforge2(url):
     return f"{url}" + "?viasf=1"
 
 
-def streamlare(url):
-    dom = api_checker()
+async def streamlare(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -660,15 +660,15 @@ def streamlare(url):
         return res["msg"]
 
 
-def streamtape(url):
+async def streamtape(url):
     try:
         return Bypass().bypass_streamtape(url)
     except BaseException:
         return "Could not Generate Direct Link for your StreamTape Link :("
 
 
-def uploadee(url):
-    dom = api_checker()
+async def uploadee(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -685,7 +685,7 @@ def uploadee(url):
         return res["msg"]
 
 
-def uptobox(url):
+async def uptobox(url):
     if UPTOBOX_TOKEN is None:
         LOGGER(__name__).info("UPTOBOX Error: Token not Provided!")
         return "UptoBox Token not Provided!"
@@ -733,15 +733,15 @@ def uptobox(url):
     return dl_url
 
 
-def uservideo(url):
+async def uservideo(url):
     try:
         return Bypass().bypass_uservideo(url)
     except BaseException:
         return "Could not Generate Direct Link for your UserVideo Link :("
 
 
-def wetransfer(url):
-    dom = api_checker()
+async def wetransfer(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -758,8 +758,8 @@ def wetransfer(url):
         return res["msg"]
 
 
-def yandex_disk(url):
-    dom = api_checker()
+async def yandex_disk(url):
+    dom = await api_checker()
     api = f"{dom}/direct"
     resp = requests.get(url)
     if resp.status_code == 404:
@@ -776,7 +776,7 @@ def yandex_disk(url):
         return res["msg"]
 
 
-def zippyshare(url):
+async def zippyshare(url):
     try:
         return Bypass().bypass_zippyshare(url)
     except BaseException:
