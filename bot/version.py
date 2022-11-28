@@ -25,4 +25,4 @@ __bot_version__ = get_version()
 __pyro_version__ = __pyrog_version__
 __pyro_layer__ = layer
 __license__ = "[GNU Affero General Public License v3.0](https://github.com/missemily22/MultiFunctionBot/blob/main/LICENSE)"
-__gitrepo__ = "https://github.com/irfan36bot/MultiFunctionBypassBot"
+__gitrepo__ = "https://github.com/"
